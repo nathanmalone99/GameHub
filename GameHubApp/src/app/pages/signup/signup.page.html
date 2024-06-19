@@ -7,6 +7,18 @@
 <ion-content>
   <form (submit)="signup()">
     <ion-item>
+      <ion-label position="floating">Username</ion-label>
+      <ion-input type="text" [(ngModel)]="username" name="username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">First Name</ion-label>
+      <ion-input type="text" [(ngModel)]="firstName" name="firstName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Last Name</ion-label>
+      <ion-input type="text" [(ngModel)]="lastName" name="lastName"></ion-input>
+    </ion-item>
+    <ion-item>
       <ion-label position="floating">Email</ion-label>
       <ion-input type="email" [(ngModel)]="email" name="email"></ion-input>
     </ion-item>

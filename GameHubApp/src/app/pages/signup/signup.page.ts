@@ -9,6 +9,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SignupPage {
 
+  username: string = '';
+  firstName: string = '';
+  lastName: string = '';
   email: string = '';
   password: string = '';
 
@@ -16,9 +19,15 @@ export class SignupPage {
 
   async signup() {
     try {
-      const user = await this.authService.register(this.email, this.password);
-      console.log('Signup successful:', user);
-      this.navCtrl.navigateForward('/home');  // Navigate to home or any other page after successful signup
+      const userCredential = await this.authService.register(this.email, this.password);
+      const user = userCredential.user;
+      if (user) {
+        console.log('Signup successful:', user);
+        await this.authService.updateUserProfile(user, this.username, this.firstName, this.lastName);
+        this.navCtrl.navigateForward('/home');  // Navigate to home or any other page after successful signup
+      } else {
+        console.error('No user returned from signup');
+      }
     } catch (error) {
       console.error('Signup error:', error);
     }
