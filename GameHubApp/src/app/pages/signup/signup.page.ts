@@ -24,7 +24,7 @@ export class SignupPage {
       if (user) {
         console.log('Signup successful:', user);
         await this.authService.updateUserProfile(user, this.username, this.firstName, this.lastName);
-        this.navCtrl.navigateForward('/home');  // Navigate to home or any other page after successful signup
+        this.navCtrl.navigateForward('/home');  // Navigate to home after successful signup
       } else {
         console.error('No user returned from signup');
       }
