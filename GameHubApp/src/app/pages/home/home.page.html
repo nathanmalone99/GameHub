@@ -1,2 +1,22 @@
 <app-navbar></app-navbar>
 
+<ion-content>
+    <ion-list>
+      <ion-item *ngFor="let game of games">
+        <ion-thumbnail slot="start">
+          <img [src]="game.background_image" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{ game.name }}</h2>
+          <p>{{ game.released }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadGames($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading more games...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
