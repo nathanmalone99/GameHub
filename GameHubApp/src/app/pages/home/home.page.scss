@@ -57,7 +57,9 @@ ion-content {
   justify-content: center;
 }
 
-.col-sm-12, .col-md-6, .col-lg-4 {
+.col-sm-12,
+.col-md-6,
+.col-lg-4 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,10 +92,10 @@ ion-content {
 }
 
 .custom-pagination .page-link:hover {
-  color: #0056b3;
-  text-decoration: none;
-  background-color: #e9ecef;
-  border-color: #dee2e6;
+  color: #fff;
+  background-color: #0056b3;
+  border-color: #004085;
+  cursor: pointer;
 }
 
 .custom-pagination .page-item.disabled .page-link {

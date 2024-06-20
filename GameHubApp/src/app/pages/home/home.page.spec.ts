@@ -25,7 +25,6 @@ describe('HomePage', () => {
     component = fixture.componentInstance;
     rawgService = TestBed.inject(RawgService);
 
-    // Mock the RawgService
     spyOn(rawgService, 'getGames').and.returnValue(
       of({
         results: [
@@ -36,8 +35,8 @@ describe('HomePage', () => {
       })
     );
 
-    component.ngOnInit(); // Initialize component
-    fixture.detectChanges(); // Apply changes
+    component.ngOnInit();
+    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -46,7 +45,7 @@ describe('HomePage', () => {
 
   it('should load games on init', () => {
     expect(component.games.length).toBe(2);
-    expect(component.totalPages).toBe(5); // Assuming pageSize is 20, total count is 100
+    expect(component.totalPages).toBe(5);
   });
 
   it('should go to the first page', () => {
