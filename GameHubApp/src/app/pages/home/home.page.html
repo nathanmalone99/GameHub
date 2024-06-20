@@ -1,22 +1,24 @@
 <app-navbar></app-navbar>
 
 <ion-content>
-    <ion-list>
-      <ion-item *ngFor="let game of games">
-        <ion-thumbnail slot="start">
-          <img [src]="game.background_image" />
-        </ion-thumbnail>
-        <ion-label>
-          <h2>{{ game.name }}</h2>
-          <p>{{ game.released }}</p>
-        </ion-label>
-      </ion-item>
-    </ion-list>
-  
-    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadGames($event)">
-      <ion-infinite-scroll-content
-        loadingSpinner="bubbles"
-        loadingText="Loading more games...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-  </ion-content>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-6 col-lg-4 mb-4" *ngFor="let game of games">
+        <div class="card h-100 fixed-card">
+          <img [src]="game.background_image" class="card-img-top fixed-image" alt="{{ game.name }}" />
+          <div class="card-body d-flex flex-column justify-content-center align-items-center">
+            <h5 class="card-title">{{ game.name }}</h5>
+            <p class="card-text">{{ game.released }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadGames($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more games...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

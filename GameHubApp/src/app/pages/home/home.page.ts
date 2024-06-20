@@ -10,7 +10,7 @@ export class HomePage {
   
   games: any[] = [];
   currentPage = 1;
-  pageSize = 10;
+  pageSize = 50;
   loading = false;
 
   constructor(private rawgService: RawgService) {}
