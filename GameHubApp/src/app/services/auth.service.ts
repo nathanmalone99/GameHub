@@ -32,4 +32,13 @@ export class AuthService {
       throw error;
     }
   }
+
+  async login(email: string, password: string) {
+    try {
+      const result = await this.afAuth.signInWithEmailAndPassword(email, password);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
