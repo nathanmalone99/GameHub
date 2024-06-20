@@ -10,7 +10,8 @@ export class HomePage {
   
   games: any[] = [];
   currentPage = 1;
-  pageSize = 50;
+  totalPages = 0;
+  pageSize = 20;
   loading = false;
 
   constructor(private rawgService: RawgService) {}
@@ -19,7 +20,7 @@ export class HomePage {
     this.loadGames();
   }
 
-  loadGames(event?: any) {
+  loadGames() {
     if (this.loading) return;
 
     this.loading = true;
@@ -28,22 +29,43 @@ export class HomePage {
         console.log('API response:', response);
 
         if (response && response.results) {
-          this.games = [...this.games, ...response.results];
-          this.currentPage++;
+          this.games = response.results;
+          this.totalPages = Math.ceil(response.count / this.pageSize);
         }
 
         this.loading = false;
-        if (event) {
-          event.target.complete();
-        }
       },
       (error) => {
         console.error('API error:', error);
         this.loading = false;
-        if (event) {
-          event.target.complete();
-        }
       }
     );
+  }
+
+  goToPage(page: number) {
+    if (page > 0 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.loadGames();
+    }
+  }
+
+  goToFirstPage() {
+    this.goToPage(1);
+  }
+
+  goToLastPage() {
+    this.goToPage(this.totalPages);
+  }
+
+  goToNextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.goToPage(this.currentPage + 1);
+    }
+  }
+
+  goToPreviousPage() {
+    if (this.currentPage > 1) {
+      this.goToPage(this.currentPage - 1);
+    }
   }
 }

@@ -13,12 +13,24 @@
         </div>
       </div>
     </div>
+    
+    <div class="row justify-content-center">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination custom-pagination">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="goToFirstPage()">First</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="goToPreviousPage()">Previous</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="goToNextPage()">Next</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="goToLastPage()">Last</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
-
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadGames($event)">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="Loading more games...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
 </ion-content>
