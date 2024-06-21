@@ -2,36 +2,27 @@
   <ion-header>
     <ion-toolbar>
       <ion-title>Favorites</ion-title>
-    </ion-toolbar>
+      </ion-toolbar>
   </ion-header>
 </app-navbar>
 
 <ion-content>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div
-        class="col-sm-12 col-md-6 col-lg-4 mb-4"
-        *ngFor="let game of favoriteGames">
-        <div class="card h-100 fixed-card">
-          <img
-            [src]="game.background_image"
-            class="card-img-top fixed-image"
-            alt="{{ game.name }}"
-          />
-          <div
-            class="card-body d-flex flex-column justify-content-center align-items-center"
-          >
-            <h5 class="card-title">{{ game.name }}</h5>
-            <p class="card-text">{{ game.released }}</p>
-            <button
-              (click)="removeFromFavorites(game.id)"
-              class="btn btn-outline-danger"
-            >
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let game of favoriteGames">
+        <ion-card>
+          <img [src]="game.background_image" class="card-img-top" alt="{{ game.name }}" />
+          <ion-card-header>
+            <ion-card-title>{{ game.name }}</ion-card-title>
+            <ion-card-subtitle>{{ game.released }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-button expand="block" color="danger" (click)="removeFromFavorites(game.id)">
               Remove from Favorites
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -7,25 +7,23 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HomePage } from './home.page';
 import { RawgService } from 'src/app/services/rawg.service';
 import { SharedModule } from 'src/app/modules/shared/shared.module'; 
+import { FavouritesService } from 'src/app/services/favourites.service';
+import { firebaseMockConfig } from 'src/app/testing/firebase.mock';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+
 
 describe('HomePage', () => {
   let component: HomePage;
   let fixture: ComponentFixture<HomePage>;
-  let rawgService: RawgService;
+  let rawgService: jasmine.SpyObj<RawgService>;
+  let favouritesService: jasmine.SpyObj<FavouritesService>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [HomePage],
-      imports: [IonicModule.forRoot(), HttpClientTestingModule, SharedModule],
-      providers: [RawgService],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
+    const rawgServiceSpy = jasmine.createSpyObj('RawgService', ['getGames']);
+    const favouritesServiceSpy = jasmine.createSpyObj('FavouritesService', ['addToFavorites', 'getFavorites', 'removeFromFavorites']);
 
-    fixture = TestBed.createComponent(HomePage);
-    component = fixture.componentInstance;
-    rawgService = TestBed.inject(RawgService);
-
-    spyOn(rawgService, 'getGames').and.returnValue(
+    rawgServiceSpy.getGames.and.returnValue(
       of({
         results: [
           { id: 1, name: 'Game 1', background_image: 'image1.jpg', released: '2020-01-01' },
@@ -34,6 +32,31 @@ describe('HomePage', () => {
         count: 100,
       })
     );
+
+    favouritesServiceSpy.getFavorites.and.returnValue(of([
+      { id: 1, name: 'Game 1', background_image: 'image1.jpg', released: '2020-01-01' }
+    ]));
+
+    await TestBed.configureTestingModule({
+      declarations: [HomePage],
+      imports: [
+        IonicModule.forRoot(),
+        HttpClientTestingModule,
+        SharedModule,
+        AngularFireModule.initializeApp(firebaseMockConfig),
+        AngularFirestoreModule
+      ],
+      providers: [
+        { provide: RawgService, useValue: rawgServiceSpy },
+        { provide: FavouritesService, useValue: favouritesServiceSpy }
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(HomePage);
+    component = fixture.componentInstance;
+    rawgService = TestBed.inject(RawgService) as jasmine.SpyObj<RawgService>;
+    favouritesService = TestBed.inject(FavouritesService) as jasmine.SpyObj<FavouritesService>;
 
     component.ngOnInit();
     fixture.detectChanges();
@@ -121,5 +144,11 @@ describe('HomePage', () => {
     });
     expect(component.currentPage).toBe(1);
     expect(rawgService.getGames).toHaveBeenCalledWith(1, 20, component.filters);
+  });
+
+  it('should add to favorites', () => {
+    const game = { id: 1, name: 'Game 1' };
+    component.addToFavorites(game);
+    expect(favouritesService.addToFavorites).toHaveBeenCalledWith(game);
   });
 });
