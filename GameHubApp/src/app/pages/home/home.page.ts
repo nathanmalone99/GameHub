@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FavouritesService } from 'src/app/services/favourites.service';
 import { RawgService } from 'src/app/services/rawg.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class HomePage {
     ordering: ''
   };
 
-  constructor(private rawgService: RawgService) {}
+  constructor(private rawgService: RawgService, private favouritesService: FavouritesService) {}
 
   ngOnInit() {
     this.loadGames();
@@ -88,5 +89,11 @@ export class HomePage {
     if (this.currentPage > 1) {
       this.goToPage(this.currentPage - 1);
     }
+  }
+
+  addToFavorites(game: any) {
+    this.favouritesService.addToFavorites(game).subscribe(() => {
+      console.log('Added to favorites');
+    });
   }
 }
