@@ -8,7 +8,7 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row>
+    <ion-row *ngIf="favoriteGames.length > 0">
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let game of favoriteGames">
         <ion-card>
           <img [src]="game.background_image" class="card-img-top" alt="{{ game.name }}" />
@@ -22,6 +22,14 @@
             </ion-button>
           </ion-card-content>
         </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="favoriteGames.length === 0">
+      <ion-col size="12" class="ion-text-center">
+        <p>You don't have any favorite games yet.</p>
+        <ion-button expand="block" routerLink="/home">
+          Click here to get started
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
