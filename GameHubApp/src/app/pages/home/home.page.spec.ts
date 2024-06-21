@@ -92,4 +92,34 @@ describe('HomePage', () => {
     fixture.detectChanges();
     expect(component.currentPage).toBe(1);
   });
+
+  it('should apply filters', () => {
+    component.filters.search = 'Test';
+    component.filters.genres = '4';
+    component.filters.platforms = '4';
+    component.filters.ordering = 'name';
+    component.applyFilters();
+    fixture.detectChanges();
+    expect(component.currentPage).toBe(1);
+    expect(rawgService.getGames).toHaveBeenCalledWith(1, 20, component.filters);
+  });
+
+  it('should clear filters', () => {
+    component.filters = {
+      search: 'Test',
+      genres: '4',
+      platforms: '4',
+      ordering: 'name'
+    };
+    component.clearFilters();
+    fixture.detectChanges();
+    expect(component.filters).toEqual({
+      search: '',
+      genres: '',
+      platforms: '',
+      ordering: ''
+    });
+    expect(component.currentPage).toBe(1);
+    expect(rawgService.getGames).toHaveBeenCalledWith(1, 20, component.filters);
+  });
 });
