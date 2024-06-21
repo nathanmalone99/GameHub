@@ -7,12 +7,18 @@ import { RawgService } from 'src/app/services/rawg.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  
+
   games: any[] = [];
   currentPage = 1;
   totalPages = 0;
   pageSize = 20;
   loading = false;
+  filters = {
+    search: '',
+    genres: '',
+    platforms: '',
+    ordering: ''
+  };
 
   constructor(private rawgService: RawgService) {}
 
@@ -24,7 +30,7 @@ export class HomePage {
     if (this.loading) return;
 
     this.loading = true;
-    this.rawgService.getGames(this.currentPage, this.pageSize).subscribe(
+    this.rawgService.getGames(this.currentPage, this.pageSize, this.filters).subscribe(
       (response) => {
         console.log('API response:', response);
 
@@ -40,6 +46,21 @@ export class HomePage {
         this.loading = false;
       }
     );
+  }
+
+  applyFilters() {
+    this.currentPage = 1;
+    this.loadGames();
+  }
+
+  clearFilters() {
+    this.filters = {
+      search: '',
+      genres: '',
+      platforms: '',
+      ordering: ''
+    };
+    this.applyFilters();
   }
 
   goToPage(page: number) {

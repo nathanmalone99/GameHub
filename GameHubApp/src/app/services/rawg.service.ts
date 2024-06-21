@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -12,13 +12,18 @@ export class RawgService {
 
   constructor(private http: HttpClient) {}
 
-  getGames(page: number = 1, pageSize: number = 10): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/games`, {
-      params: {
-        key: this.apiKey,
-        page: page.toString(),
-        page_size: pageSize.toString()
+  getGames(page: number = 1, pageSize: number = 10, filters: any = {}): Observable<any> {
+    let params = new HttpParams()
+      .set('key', this.apiKey)
+      .set('page', page.toString())
+      .set('page_size', pageSize.toString());
+
+    for (const key in filters) {
+      if (filters.hasOwnProperty(key) && filters[key]) {
+        params = params.set(key, filters[key]);
       }
-    });
+    }
+
+    return this.http.get<any>(`${this.apiUrl}/games`, { params });
   }
 }

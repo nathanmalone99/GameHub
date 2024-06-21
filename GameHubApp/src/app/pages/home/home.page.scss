@@ -123,3 +123,42 @@ ion-content {
   border-top-right-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
 }
+
+
+.search-input {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.genre-select, .platform-select, .ordering-select {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.apply-filters-btn {
+  background-color: #007bff;
+  border-color: #007bff;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.apply-filters-btn:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.clear-filters-btn {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.clear-filters-btn:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}

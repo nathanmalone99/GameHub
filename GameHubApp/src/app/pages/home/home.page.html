@@ -2,6 +2,66 @@
 
 <ion-content>
   <div class="container">
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <input type="text" [(ngModel)]="filters.search" placeholder="Search games..." class="form-control search-input" />
+      </div>
+      <div class="col-md-3">
+        <select [(ngModel)]="filters.genres" class="form-control genre-select">
+          <option value="">All Genres</option>
+          <option value="4">Action</option>
+          <option value="51">Indie</option>
+          <option value="3">Adventure</option>
+          <option value="5">RPG</option>
+          <option value="10">Strategy</option>
+          <option value="2">Shooter</option>
+          <option value="14">Simulation</option>
+          <option value="7">Puzzle</option>
+          <option value="11">Arcade</option>
+          <option value="83">Platformer</option>
+          <option value="1">Racing</option>
+          <option value="15">Sports</option>
+          <option value="6">Fighting</option>
+          <option value="19">Family</option>
+          <option value="28">Board Games</option>
+          <!-- Add more genres as needed -->
+        </select>
+      </div>
+      <div class="col-md-3">
+        <select [(ngModel)]="filters.platforms" class="form-control platform-select">
+          <option value="">All Platforms</option>
+          <option value="4">PC</option>
+          <option value="187">PlayStation 5</option>
+          <option value="18">PlayStation 4</option>
+          <option value="1">Xbox One</option>
+          <option value="186">Xbox Series S/X</option>
+          <option value="7">Nintendo Switch</option>
+          <option value="3">iOS</option>
+          <option value="21">Android</option>
+          <!-- Add more platforms as needed -->
+        </select>
+      </div>
+      <div class="col-md-3">
+        <select [(ngModel)]="filters.ordering" class="form-control ordering-select">
+          <option value="">Default Ordering</option>
+          <option value="name">Name</option>
+          <option value="-released">Released (Newest)</option>
+          <option value="released">Released (Oldest)</option>
+          <option value="-rating">Rating (Highest)</option>
+          <option value="rating">Rating (Lowest)</option>
+          <!-- Add more ordering options as needed -->
+        </select>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6 text-right">
+        <button (click)="applyFilters()" class="btn btn-primary apply-filters-btn">Apply Filters</button>
+      </div>
+      <div class="col-md-6 text-left">
+        <button (click)="clearFilters()" class="btn btn-secondary clear-filters-btn">Clear Filters</button>
+      </div>
+    </div>
+
     <div class="row justify-content-center">
       <div class="col-sm-12 col-md-6 col-lg-4 mb-4" *ngFor="let game of games">
         <div class="card h-100 fixed-card">
