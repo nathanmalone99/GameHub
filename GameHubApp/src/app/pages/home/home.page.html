@@ -61,13 +61,12 @@
 
     <div class="row justify-content-center">
       <div class="col-sm-12 col-md-6 col-lg-4 mb-4" *ngFor="let game of games">
-        <div class="card h-100 fixed-card">
+        <div class="card h-100 fixed-card" (click)="goToGameDetails(game.id)">
           <img [src]="game.background_image" class="card-img-top fixed-image" alt="{{ game.name }}" />
           <div class="card-body d-flex flex-column justify-content-center align-items-center">
             <h5 class="card-title">{{ game.name }}</h5>
             <p class="card-text">{{ game.released }}</p>
-            <button (click)="addToFavorites(game)" class="btn btn-outline-primary">Add to Favorites</button>
-
+            <button (click)="addToFavorites(game); $event.stopPropagation();" class="btn btn-outline-primary">Add to Favorites</button>
           </div>
         </div>
       </div>

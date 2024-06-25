@@ -10,7 +10,7 @@
   <ion-grid>
     <ion-row *ngIf="favoriteGames.length > 0">
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let game of favoriteGames">
-        <ion-card>
+        <ion-card (click)="goToGameDetails(game.id)">
           <img [src]="game.background_image" class="card-img-top" alt="{{ game.name }}" />
           <ion-card-header>
             <ion-card-title>{{ game.name }}</ion-card-title>

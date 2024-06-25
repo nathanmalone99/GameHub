@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FavouritesService } from 'src/app/services/favourites.service';
 import { RawgService } from 'src/app/services/rawg.service';
 
@@ -21,7 +22,7 @@ export class HomePage {
     ordering: ''
   };
 
-  constructor(private rawgService: RawgService, private favouritesService: FavouritesService) {}
+  constructor(private rawgService: RawgService, private favouritesService: FavouritesService, private router: Router) {}
 
   ngOnInit() {
     this.loadGames();
@@ -95,5 +96,9 @@ export class HomePage {
     this.favouritesService.addToFavorites(game).subscribe(() => {
       console.log('Added to favorites');
     });
+  }
+
+  goToGameDetails(gameId: string) {
+    this.router.navigate(['/game-details', gameId]);
   }
 }

@@ -1,0 +1,58 @@
+:host {
+    ion-content {
+      --background: var(--ion-background-color, #f8f8f8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+  
+    .d-flex {
+      display: flex;
+    }
+  
+    .justify-content-center {
+      justify-content: center;
+    }
+  
+    .align-items-center {
+      align-items: center;
+    }
+  
+    .h-100 {
+      height: 100%;
+    }
+  
+    .game-card {
+      max-width: 600px;
+      width: 100%;
+      margin: 20px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  
+    .game-image {
+      width: 100%;
+      height: auto;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+  
+    .card-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--ion-color-primary, #3880ff);
+    }
+  
+    .card-text {
+      font-size: 16px;
+      color: var(--ion-color-dark, #333);
+    }
+  
+    .loading-spinner {
+      display: block;
+      margin: 100px auto;
+    }
+  }
+  

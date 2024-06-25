@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FavouritesService } from 'src/app/services/favourites.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class FavouritesPage implements OnInit {
 
   favoriteGames: any[] = [];
 
-  constructor(private favouritesService: FavouritesService) {}
+  constructor(private favouritesService: FavouritesService, private router: Router) {}
 
   ngOnInit() {
     this.loadFavorites();
@@ -26,5 +27,9 @@ export class FavouritesPage implements OnInit {
     this.favouritesService.removeFromFavorites(gameId).subscribe(() => {
       this.loadFavorites();
     });
+  }
+
+  goToGameDetails(gameId: string) {
+    this.router.navigate(['/game-details', gameId]);
   }
 }

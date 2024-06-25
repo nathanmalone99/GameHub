@@ -26,4 +26,10 @@ export class RawgService {
 
     return this.http.get<any>(`${this.apiUrl}/games`, { params });
   }
+
+  getGameDetails(gameId: string): Observable<any> {
+    const params = new HttpParams().set('key', this.apiKey);
+    const url = `${this.apiUrl}/games/${gameId}`;
+    return this.http.get(url, { params });
+  }
 }

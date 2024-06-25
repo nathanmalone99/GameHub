@@ -10,6 +10,11 @@ const routes: Routes = [
     path: 'favourites',
     loadChildren: () => import('./pages/favourites/favourites.module').then( m => m.FavouritesPageModule)
   },
+  {
+    path: 'game-details/:id',
+    loadChildren: () => import('./pages/game-details/game-details.module').then( m => m.GameDetailsPageModule)
+  },
+
 
 ];
 
