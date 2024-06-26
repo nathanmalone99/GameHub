@@ -13,7 +13,7 @@ export class HomePage {
   games: any[] = [];
   currentPage = 1;
   totalPages = 0;
-  pageSize = 20;
+  pageSize = 21;
   loading = false;
   filters = {
     search: '',
