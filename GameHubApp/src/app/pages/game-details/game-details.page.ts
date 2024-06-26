@@ -12,6 +12,7 @@ export class GameDetailsPage implements OnInit {
   game: any;
   gameAdditions: any[] = [];
   gameScreenshots: any[] = [];
+  gameMovies: any[] = [];
   gameId: string | null = null;
   page: number = 1;
   pageSize: number = 10;
@@ -28,6 +29,7 @@ export class GameDetailsPage implements OnInit {
       this.loadGameDetails(this.gameId);
       this.loadGameAdditions(this.gameId);
       this.loadGameScreenshots(this.gameId);
+      // this.loadGameMovies(this.gameId);
     } else {
       console.error('Game ID is null');
     }
@@ -54,4 +56,14 @@ export class GameDetailsPage implements OnInit {
       this.gameScreenshots = data.results;
     });
   }
+
+  /* loadGameMovies(gameId: string) {
+    this.rawgService.getGameMovies(gameId).subscribe((data) => {
+      if (data.results && data.results.length > 0) {
+        this.gameMovies = data.results;
+      } else {
+        console.log('No movies available for this game.');
+      }
+    });
+  } */
 }

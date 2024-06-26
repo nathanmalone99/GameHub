@@ -52,6 +52,20 @@
       </div>
     </ng-template>
 
+    <!-- <h2>Movie Previews</h2>
+    <div *ngIf="gameMovies.length > 0; else noMovies">
+      <div *ngFor="let movie of gameMovies" class="movie-item">
+        <h3>{{ movie.name }}</h3>
+        <video controls [src]="movie.preview" class="movie-preview" type="video/mp4"></video>
+      </div>
+    </div>
+
+    <ng-template #noMovies>
+      <div class="alert alert-warning" role="alert">
+        No Movies Found
+      </div>
+    </ng-template> -->
+
     <ng-template #loading>
       <ion-spinner class="loading-spinner"></ion-spinner>
     </ng-template>

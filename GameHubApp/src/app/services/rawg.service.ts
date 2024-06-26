@@ -50,4 +50,9 @@ export class RawgService {
     const url = `${this.apiUrl}/games/${gameId}/screenshots?key=${this.apiKey}&page=${page}&page_size=${pageSize}`;
     return this.http.get<any>(url);
   }
+
+  /* getGameMovies(gameId: string): Observable<any> {
+    const url = `${this.apiUrl}/games/${gameId}/movies?key=${this.apiKey}`;
+    return this.http.get<any>(url);
+  } */
 }
