@@ -10,6 +10,7 @@ import { RawgService } from 'src/app/services/rawg.service';
 export class GameDetailsPage implements OnInit {
 
   game: any;
+  gameTags: any[] = [];
   gameAdditions: any[] = [];
   gameScreenshots: any[] = [];
   gameMovies: any[] = [];
@@ -38,6 +39,7 @@ export class GameDetailsPage implements OnInit {
   loadGameDetails(gameId: string) {
     this.rawgService.getGameDetails(gameId).subscribe(game => {
       this.game = game;
+      this.gameTags = game.tags;
     });
   }
 

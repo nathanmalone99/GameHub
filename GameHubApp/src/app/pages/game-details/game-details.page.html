@@ -66,6 +66,19 @@
       </div>
     </ng-template> -->
 
+    <h2>Tags</h2>
+    <div *ngIf="gameTags.length > 0; else noTags">
+      <div *ngFor="let tag of gameTags" class="tag-item">
+        {{ tag.name }}
+      </div>
+    </div>
+
+    <ng-template #noTags>
+      <div class="alert alert-warning" role="alert">
+        No Tags Found
+      </div>
+    </ng-template>
+
     <ng-template #loading>
       <ion-spinner class="loading-spinner"></ion-spinner>
     </ng-template>
