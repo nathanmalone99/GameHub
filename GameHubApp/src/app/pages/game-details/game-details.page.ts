@@ -9,8 +9,11 @@ import { RawgService } from 'src/app/services/rawg.service';
 })
 export class GameDetailsPage implements OnInit {
 
-  gameId: string | null = null;
   game: any;
+  gameAdditions: any[] = [];
+  gameId: string | null = null;
+  page: number = 1;
+  pageSize: number = 10;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,18 +23,27 @@ export class GameDetailsPage implements OnInit {
 
   ngOnInit() {
     this.gameId = this.route.snapshot.paramMap.get('id');
-    this.loadGameDetails();
+    if (this.gameId) {
+      this.loadGameDetails(this.gameId);
+      this.loadGameAdditions(this.gameId);
+    } else {
+      console.error('Game ID is null');
+    }
   }
 
-  loadGameDetails() {
-    if (this.gameId) {
-      this.rawgService.getGameDetails(this.gameId).subscribe(game => {
-        this.game = game;
-      });
-    }
+  loadGameDetails(gameId: string) {
+    this.rawgService.getGameDetails(gameId).subscribe(game => {
+      this.game = game;
+    });
   }
 
   goToAchievements(gameId: string) {
     this.router.navigate(['/achievements', gameId]);
+  }
+
+  loadGameAdditions(gameId: string) {
+    this.rawgService.getGameAdditions(gameId, this.page, this.pageSize).subscribe((data) => {
+      this.gameAdditions = data.results;
+    });
   }
 }

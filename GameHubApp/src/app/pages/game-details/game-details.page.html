@@ -15,12 +15,26 @@
         <h5 class="card-title">{{ game?.name }}</h5>
         <p class="card-text"><strong>Released:</strong> {{ game?.released }}</p>
         <p class="card-text">{{ game?.description_raw }}</p>
-        <ion-button expand="block" color="primary" (click)="goToAchievements(game?.id)">
-          View Achievements
-        </ion-button>
       </div>
     </div>
   </div>
+
+  <h2 class="ion-padding">Additions</h2>
+  <ion-list *ngIf="gameAdditions.length > 0; else noAdditions">
+    <ion-item *ngFor="let addition of gameAdditions">
+      <ion-label>
+        <h2>{{ addition.name }}</h2>
+        <p>{{ addition.released }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #noAdditions>
+    <div class="ion-padding">
+      <h2>No Additions Found</h2>
+    </div>
+  </ng-template>
+
   <ng-template #loading>
     <ion-spinner class="loading-spinner"></ion-spinner>
   </ng-template>
