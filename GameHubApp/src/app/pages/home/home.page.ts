@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
 import { FavouritesService } from 'src/app/services/favourites.service';
 import { RawgService } from 'src/app/services/rawg.service';
 
@@ -22,7 +23,7 @@ export class HomePage {
     ordering: ''
   };
 
-  constructor(private rawgService: RawgService, private favouritesService: FavouritesService, private router: Router) {}
+  constructor(private rawgService: RawgService, private favouritesService: FavouritesService, private router: Router, private cartService: CartService ) {}
 
   ngOnInit() {
     this.loadGames();
@@ -96,6 +97,18 @@ export class HomePage {
     this.favouritesService.addToFavorites(game).subscribe(() => {
       console.log('Added to favorites');
     });
+  }
+
+  addToCart(game: any) {
+    const gameWithPrice = { ...game, price: this.generateRandomPrice() };
+    this.cartService.addToCart(gameWithPrice);
+    console.log('Added to cart with price:', gameWithPrice.price);
+  }
+  
+  generateRandomPrice() {
+    const min = 10;
+    const max = 60;
+    return (Math.random() * (max - min) + min).toFixed(2);
   }
 
   goToGameDetails(gameId: string) {
