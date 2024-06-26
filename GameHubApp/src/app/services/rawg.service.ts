@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class RawgService {
 
-  private apiKey = '6f16f1bd149e41ae9eaf8f3a0a394e5b';  
+  private apiKey = '6f16f1bd149e41ae9eaf8f3a0a394e5b';
   private apiUrl = 'https://api.rawg.io/api';
 
   constructor(private http: HttpClient) {}
@@ -30,6 +30,14 @@ export class RawgService {
   getGameDetails(gameId: string): Observable<any> {
     const params = new HttpParams().set('key', this.apiKey);
     const url = `${this.apiUrl}/games/${gameId}`;
+    return this.http.get(url, { params });
+  }
+
+  getGameAchievements(gameId: string, page: number = 1): Observable<any> {
+    const params = new HttpParams()
+      .set('key', this.apiKey)
+      .set('page', page.toString());
+    const url = `${this.apiUrl}/games/${gameId}/achievements`;
     return this.http.get(url, { params });
   }
 }

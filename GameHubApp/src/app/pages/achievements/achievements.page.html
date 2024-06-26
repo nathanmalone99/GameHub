@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Achievements</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="achievements.length > 0; else noAchievements">
+    <ion-item *ngFor="let achievement of achievements">
+      <ion-avatar slot="start">
+        <img [src]="achievement.image" alt="{{ achievement.name }}">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ achievement.name }}</h2>
+        <p>{{ achievement.description }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #noAchievements>
+    <div class="ion-padding">
+      <h2>No Achievements Found</h2>
+    </div>
+  </ng-template>
+</ion-content>

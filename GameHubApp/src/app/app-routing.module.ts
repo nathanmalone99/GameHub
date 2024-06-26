@@ -14,6 +14,11 @@ const routes: Routes = [
     path: 'game-details/:id',
     loadChildren: () => import('./pages/game-details/game-details.module').then( m => m.GameDetailsPageModule)
   },
+  {
+    path: 'achievements/:id',
+    loadChildren: () => import('./pages/achievements/achievements.module').then( m => m.AchievementsPageModule)
+  },
+
 
 
 ];

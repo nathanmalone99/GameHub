@@ -101,4 +101,8 @@ export class HomePage {
   goToGameDetails(gameId: string) {
     this.router.navigate(['/game-details', gameId]);
   }
+
+  goToAchievements(gameId: string) {
+    this.router.navigate(['/achievements', gameId]);
+  }
 }
