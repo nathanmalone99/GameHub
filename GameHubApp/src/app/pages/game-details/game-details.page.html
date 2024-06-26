@@ -8,34 +8,39 @@
 </ion-header>
 
 <ion-content>
-  <div class="d-flex justify-content-center align-items-center h-100">
-    <div class="card game-card">
-      <img [src]="game?.background_image" class="card-img-top game-image" alt="{{ game?.name }}">
-      <div class="card-body">
-        <h5 class="card-title">{{ game?.name }}</h5>
-        <p class="card-text"><strong>Released:</strong> {{ game?.released }}</p>
-        <p class="card-text">{{ game?.description_raw }}</p>
+  <div class="container">
+    <div class="d-flex justify-content-center">
+      <div class="game-card">
+        <img [src]="game?.background_image" class="game-image" alt="{{ game?.name }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ game?.name }}</h5>
+          <p class="card-text"><strong>Released:</strong> {{ game?.released }}</p>
+          <p class="card-text">{{ game?.description_raw }}</p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <h2 class="ion-padding">Additions</h2>
-  <ion-list *ngIf="gameAdditions.length > 0; else noAdditions">
-    <ion-item *ngFor="let addition of gameAdditions">
-      <ion-label>
-        <h2>{{ addition.name }}</h2>
-        <p>{{ addition.released }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-
-  <ng-template #noAdditions>
-    <div class="ion-padding">
-      <h2>No Additions Found</h2>
+    <h2>Additions</h2>
+    <div *ngIf="gameAdditions.length > 0; else noAdditions">
+      <div *ngFor="let addition of gameAdditions" class="addition-item">
+        <div class="addition-avatar">
+          <img [src]="addition.background_image" alt="{{ addition.name }}">
+        </div>
+        <div class="addition-details">
+          <div class="addition-name">{{ addition.name }}</div>
+          <div class="addition-released"><strong>Released:</strong> {{ addition.released }}</div>
+        </div>
+      </div>
     </div>
-  </ng-template>
 
-  <ng-template #loading>
-    <ion-spinner class="loading-spinner"></ion-spinner>
-  </ng-template>
+    <ng-template #noAdditions>
+      <div class="alert alert-warning" role="alert">
+        No Additions Found
+      </div>
+    </ng-template>
+
+    <ng-template #loading>
+      <ion-spinner class="loading-spinner"></ion-spinner>
+    </ng-template>
+  </div>
 </ion-content>
