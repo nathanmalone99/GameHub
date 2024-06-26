@@ -39,6 +39,19 @@
       </div>
     </ng-template>
 
+    <h2>Screenshots</h2>
+    <div *ngIf="gameScreenshots.length > 0; else noScreenshots">
+      <div *ngFor="let screenshot of gameScreenshots" class="screenshot-item">
+        <img [src]="screenshot.image" alt="Screenshot">
+      </div>
+    </div>
+
+    <ng-template #noScreenshots>
+      <div class="alert alert-warning" role="alert">
+        No Screenshots Found
+      </div>
+    </ng-template>
+
     <ng-template #loading>
       <ion-spinner class="loading-spinner"></ion-spinner>
     </ng-template>

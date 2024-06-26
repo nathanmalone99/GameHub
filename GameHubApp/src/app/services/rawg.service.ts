@@ -45,4 +45,9 @@ export class RawgService {
     const url = `${this.apiUrl}/games/${gameId}/additions?key=${this.apiKey}&page=${page}&page_size=${pageSize}`;
     return this.http.get<any>(url);
   }
+
+  getGameScreenshots(gameId: string, page: number = 1, pageSize: number = 10): Observable<any> {
+    const url = `${this.apiUrl}/games/${gameId}/screenshots?key=${this.apiKey}&page=${page}&page_size=${pageSize}`;
+    return this.http.get<any>(url);
+  }
 }

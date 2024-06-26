@@ -11,6 +11,7 @@ export class GameDetailsPage implements OnInit {
 
   game: any;
   gameAdditions: any[] = [];
+  gameScreenshots: any[] = [];
   gameId: string | null = null;
   page: number = 1;
   pageSize: number = 10;
@@ -26,6 +27,7 @@ export class GameDetailsPage implements OnInit {
     if (this.gameId) {
       this.loadGameDetails(this.gameId);
       this.loadGameAdditions(this.gameId);
+      this.loadGameScreenshots(this.gameId);
     } else {
       console.error('Game ID is null');
     }
@@ -44,6 +46,12 @@ export class GameDetailsPage implements OnInit {
   loadGameAdditions(gameId: string) {
     this.rawgService.getGameAdditions(gameId, this.page, this.pageSize).subscribe((data) => {
       this.gameAdditions = data.results;
+    });
+  }
+
+  loadGameScreenshots(gameId: string) {
+    this.rawgService.getGameScreenshots(gameId, this.page, this.pageSize).subscribe((data) => {
+      this.gameScreenshots = data.results;
     });
   }
 }
