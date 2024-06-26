@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RawgService } from 'src/app/services/rawg.service';
 
 @Component({
@@ -14,7 +14,8 @@ export class GameDetailsPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private rawgService: RawgService
+    private rawgService: RawgService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -28,5 +29,9 @@ export class GameDetailsPage implements OnInit {
         this.game = game;
       });
     }
+  }
+
+  goToAchievements(gameId: string) {
+    this.router.navigate(['/achievements', gameId]);
   }
 }
