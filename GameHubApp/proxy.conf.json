@@ -1,11 +1,20 @@
 {
-    "/api": {
-      "target": "https://api.rawg.io",
-      "secure": false,
-      "changeOrigin": true,
-      "logLevel": "debug",
-      "pathRewrite": {
-        "^/api": ""
-      }
+  "/api": {
+    "target": "https://api.rawg.io",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api": ""
+    }
+  },
+  "/steam-api": {
+    "target": "https://api.steampowered.com",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/steam-api": ""
     }
   }
+}
