@@ -8,21 +8,28 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngIf="achievements.length > 0; else noAchievements">
-    <ion-item *ngFor="let achievement of achievements">
-      <ion-avatar slot="start">
-        <img [src]="achievement.image" alt="{{ achievement.name }}">
-      </ion-avatar>
-      <ion-label>
-        <h2>{{ achievement.name }}</h2>
-        <p>{{ achievement.description }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-
-  <ng-template #noAchievements>
-    <div class="ion-padding">
-      <h2>No Achievements Found</h2>
+  <div class="d-flex justify-content-center align-items-center h-100">
+    <div class="card achievements-card">
+      <div class="card-body">
+        <h5 class="card-title text-center">Achievements</h5>
+        <ion-list *ngIf="achievements.length > 0; else noAchievements">
+          <ion-item *ngFor="let achievement of achievements">
+            <ion-avatar slot="start">
+              <img [src]="achievement.image" alt="{{ achievement.name }}">
+            </ion-avatar>
+            <ion-label>
+              <h2>{{ achievement.name }}</h2>
+              <p>{{ achievement.description }}</p>
+              <p><strong>Percent:</strong> {{ achievement.percent }}%</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        <ng-template #noAchievements>
+          <div class="text-center">
+            <p>No Achievements Found</p>
+          </div>
+        </ng-template>
+      </div>
     </div>
-  </ng-template>
+  </div>
 </ion-content>

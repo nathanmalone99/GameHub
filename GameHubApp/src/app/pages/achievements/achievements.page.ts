@@ -26,10 +26,8 @@ export class AchievementsPage implements OnInit {
   loadAchievements(page: number = 1) {
     if (this.gameId) {
       this.rawgService.getGameAchievements(this.gameId, page).subscribe(data => {
-        console.log('Achievements data:', data); // Log the API response
+        console.log('Achievements data:', data);
         this.achievements = this.achievements.concat(data.results);
-
-        // Fetch next page if there are more pages
         if (data.next) {
           this.loadAchievements(page + 1);
         }
