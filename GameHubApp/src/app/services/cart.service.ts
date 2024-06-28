@@ -15,13 +15,16 @@ export class CartService {
     const currentCart = this.cart.value;
     currentCart.push(game);
     this.cart.next(currentCart);
+    console.log('CartService: Added game to cart', game);
+    console.log('CartService: Current cart', this.cart.value);
   }
-
   getCart() {
+    console.log('CartService: Getting current cart', this.cart.value);
     return this.cart.value;
   }
 
   clearCart() {
     this.cart.next([]);
+    console.log('CartService: Cart cleared');
   }
 }

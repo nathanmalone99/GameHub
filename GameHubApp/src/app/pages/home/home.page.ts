@@ -106,7 +106,7 @@ export class HomePage {
   }
   
   generateRandomPrice() {
-    const min = 10;
+    const min = 20;
     const max = 60;
     return (Math.random() * (max - min) + min).toFixed(2);
   }
