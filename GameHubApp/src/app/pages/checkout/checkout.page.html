@@ -1,13 +1,30 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>checkout</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<app-navbar>
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">checkout</ion-title>
+      <ion-title>Checkout</ion-title>
     </ion-toolbar>
   </ion-header>
+</app-navbar>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of cartItems">
+      <ion-thumbnail slot="start">
+        <img [src]="item.background_image" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ item.name }}</h2>
+        <p>{{ item.released }}</p>
+        <p>Price: €{{ item.price }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-item>
+    <ion-label>
+      <h2>Total</h2>
+    </ion-label>
+    <ion-note slot="end"> €{{ total.toFixed(2) }} </ion-note>
+  </ion-item>
+  <ion-button expand="full" (click)="checkout()"
+    >Proceed to Checkout</ion-button>
 </ion-content>
