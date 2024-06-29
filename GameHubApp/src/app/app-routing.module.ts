@@ -15,7 +15,11 @@ const routes: Routes = [
   {
     path: 'achievements/:id',
     loadChildren: () => import('./pages/achievements/achievements.module').then( m => m.AchievementsPageModule)
+  },  {
+    path: 'checkout',
+    loadChildren: () => import('./pages/checkout/checkout.module').then( m => m.CheckoutPageModule)
   }
+
   /* {
     path: 'user-library',
     loadChildren: () => import('./pages/user-library/user-library.module').then( m => m.UserLibraryPageModule)
