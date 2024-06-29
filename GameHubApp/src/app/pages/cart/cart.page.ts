@@ -38,6 +38,10 @@ export class CartPage implements OnInit {
     console.log('CartPage: Cart cleared');
   }
 
+  removeGame(gameId: number) {
+    this.cartService.removeFromCart(gameId);
+  }
+
   calculateTotal() {
     this.total = this.cartItems.reduce((sum, item) => sum + parseFloat(item.price), 0);
     console.log('CartPage: Total calculated', this.total);

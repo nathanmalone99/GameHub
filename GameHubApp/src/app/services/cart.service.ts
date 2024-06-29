@@ -18,6 +18,14 @@ export class CartService {
     console.log('CartService: Added game to cart', game);
     console.log('CartService: Current cart', this.cart.value);
   }
+
+  removeFromCart(gameId: number) {
+    const currentCart = this.cart.value.filter(game => game.id !== gameId);
+    this.cart.next(currentCart);
+    console.log('CartService: Removed game from cart', gameId);
+    console.log('CartService: Current cart', this.cart.value);
+  }
+
   getCart() {
     console.log('CartService: Getting current cart', this.cart.value);
     return this.cart.value;
