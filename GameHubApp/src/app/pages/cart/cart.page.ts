@@ -11,8 +11,7 @@ export class CartPage implements OnInit {
 
   cartItems: any[] = [];
   total: number = 0;
-  cartSubscription: Subscription | null = null;;
-
+  cartSubscription: Subscription | null = null;
 
   constructor(private cartService: CartService) {}
 

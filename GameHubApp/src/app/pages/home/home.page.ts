@@ -100,15 +100,17 @@ export class HomePage {
   }
 
   addToCart(game: any) {
-    const gameWithPrice = { ...game, price: this.generateRandomPrice() };
+    const gameWithPrice = { ...game, price: this.generateRandomPriceInEuros() };
     this.cartService.addToCart(gameWithPrice);
     console.log('Added to cart with price:', gameWithPrice.price);
   }
   
-  generateRandomPrice() {
+  generateRandomPriceInEuros() {
     const min = 20;
     const max = 60;
-    return (Math.random() * (max - min) + min).toFixed(2);
+    const priceInDollars = Math.random() * (max - min) + min;
+    const priceInEuros = (priceInDollars * 0.85).toFixed(2);
+    return priceInEuros;
   }
 
   goToGameDetails(gameId: string) {

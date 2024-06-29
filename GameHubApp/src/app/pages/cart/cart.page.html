@@ -1,8 +1,10 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Cart</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-navbar>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Cart</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</app-navbar>
 
 <ion-content>
   <ion-list>
@@ -13,7 +15,7 @@
       <ion-label>
         <h2>{{ item.name }}</h2>
         <p>{{ item.released }}</p>
-        <p>Price: ${{ item.price }}</p>
+        <p>Price: €{{ item.price }}</p>
       </ion-label>
     </ion-item>
   </ion-list>
@@ -21,9 +23,7 @@
     <ion-label>
       <h2>Total</h2>
     </ion-label>
-    <ion-note slot="end">
-      ${{ total.toFixed(2) }}
-    </ion-note>
+    <ion-note slot="end"> €{{ total.toFixed(2) }} </ion-note>
   </ion-item>
   <ion-button expand="full" (click)="clearCart()">Clear Cart</ion-button>
 </ion-content>
