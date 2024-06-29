@@ -10,7 +10,23 @@ export class NavbarComponent {
 
   constructor(private router: Router) {}
 
-  openSettings() {
-    this.router.navigate(['/settings']);
+  goToHomePage() {
+    this.router.navigate(['/home']);
+  }
+
+  goToSignupPage() {
+    this.router.navigate(['/signup']);
+  }
+
+  goToLoginPage() {
+    this.router.navigate(['/login']);
+  }
+
+  goToFavouritesPage() {
+    this.router.navigate(['/favourites']);
+  }
+
+  goToCartPage() {
+    this.router.navigate(['/cart']);
   }
 }
