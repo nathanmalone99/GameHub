@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+
 
 
 @Injectable({
@@ -7,33 +10,56 @@ import { loadStripe, Stripe } from '@stripe/stripe-js';
 })
 export class StripeService {
 
-  private stripePromise: Promise<Stripe | null>;
+  private stripePublicKey = environment.stripePublicKey;
+  private firebaseFunctionUrl = environment.firebaseFunctionUrl;
+  private stripePromise = loadStripe(this.stripePublicKey);
 
-  constructor() {
-    this.stripePromise = loadStripe('');
+  constructor(private http: HttpClient) {}
+
+  async createPaymentIntent(amount: number) {
+    return this.http.post<{ clientSecret: string }>(this.firebaseFunctionUrl, { amount }).toPromise();
   }
 
-  async redirectToCheckout(items: any[]): Promise<void> {
+  async getStripe() {
+    return this.stripePromise;
+  }
+
+  async redirectToCheckout(cartItems: any[]) {
     const stripe = await this.stripePromise;
+    if (!stripe) {
+      throw new Error('Stripe failed to load');
+    }
 
-    if (stripe) {
-      const response = await fetch('/create-checkout-session', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
+    // Create line items for Stripe Checkout
+    const lineItems = cartItems.map(item => ({
+      price_data: {
+        currency: 'eur',
+        product_data: {
+          name: item.name,
+          images: [item.background_image],
         },
-        body: JSON.stringify({ items })
-      });
+        unit_amount: item.price * 100, // amount in cents
+      },
+      quantity: 1,
+    }));
 
-      const session = await response.json();
+    // Call your backend to create a Checkout Session
+    const session = await this.http.post<{ id: string }>(
+      `${this.firebaseFunctionUrl}/create-checkout-session`,
+      { lineItems }
+    ).toPromise();
 
-      const result = await stripe.redirectToCheckout({
-        sessionId: session.id
-      });
+    if (!session) {
+      throw new Error('Failed to create checkout session');
+    }
 
-      if (result.error) {
-        console.error(result.error.message);
-      }
+    // Redirect to Stripe Checkout
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+
+    if (result.error) {
+      console.error(result.error.message);
     }
   }
 }

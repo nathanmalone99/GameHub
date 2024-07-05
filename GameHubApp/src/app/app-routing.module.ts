@@ -18,6 +18,18 @@ const routes: Routes = [
   },  {
     path: 'checkout',
     loadChildren: () => import('./pages/checkout/checkout.module').then( m => m.CheckoutPageModule)
+  },
+  {
+    path: 'success',
+    loadChildren: () => import('./pages/success/success.module').then( m => m.SuccessPageModule)
+  },
+  {
+    path: 'cancel',
+    loadChildren: () => import('./pages/cancel/cancel.module').then( m => m.CancelPageModule)
+  },
+  {
+    path: 'custom-checkout',
+    loadChildren: () => import('./pages/custom-checkout/custom-checkout.module').then( m => m.CustomCheckoutPageModule)
   }
 
   /* {

@@ -6,6 +6,7 @@
   </ion-header>
 </app-navbar>
 
+
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let item of cartItems">
@@ -29,4 +30,5 @@
     </ion-note>
   </ion-item>
   <ion-button expand="full" (click)="clearCart()">Clear Cart</ion-button>
+  <ion-button expand="full" routerLink="/custom-checkout">Proceed to Checkout</ion-button>
 </ion-content>

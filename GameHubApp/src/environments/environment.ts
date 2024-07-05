@@ -1,5 +1,8 @@
 export const environment = {
   production: false,
+  stripePublicKey: 'pk_test_51N7gd7IB2R5TmgiivsbQfGz3Xix7juEdTtoQyzViy3smc2wQGR3RilkZoQgsFbsaaX2EZk5HKC2OZbntbslHQTKn00g0xqAmSM',
+  firebaseFunctionUrl: 'https://europe-west1-gamehub-e4466.cloudfunctions.net/createPaymentIntent',
+  
   firebase: {
     apiKey: "AIzaSyAzSwu7Jjb5yWlKjP21bLwj3uKti4qf_9k",
     authDomain: "gamehub-e4466.firebaseapp.com",
