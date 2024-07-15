@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'custom-checkout',
     loadChildren: () => import('./pages/custom-checkout/custom-checkout.module').then( m => m.CustomCheckoutPageModule)
+  },
+  {
+    path: 'recommendation',
+    loadChildren: () => import('./pages/recommendation/recommendation.module').then( m => m.RecommendationPageModule)
   }
 
   /* {
