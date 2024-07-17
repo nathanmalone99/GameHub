@@ -1,13 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RawgService {
 
-  private apiKey = '6f16f1bd149e41ae9eaf8f3a0a394e5b';
+  private apiKey = environment.rawgApiKey;
   private apiUrl = 'https://api.rawg.io/api';
 
   constructor(private http: HttpClient) {}
@@ -33,9 +34,33 @@ export class RawgService {
     return this.http.get<any>(url, { params });
   }
 
-  getSimilarGames(gameId: string): Observable<any> {
-    const params = new HttpParams().set('key', this.apiKey);
-    const url = `${this.apiUrl}/games/${gameId}/suggested`;
+  getGamesByGenre(genreId: string, page: number = 1, pageSize: number = 10): Observable<any> {
+    const params = new HttpParams()
+      .set('key', this.apiKey)
+      .set('genres', genreId)
+      .set('page', page.toString())
+      .set('page_size', pageSize.toString());
+    const url = `${this.apiUrl}/games`;
+    return this.http.get<any>(url, { params });
+  }
+
+  getGamesByDeveloper(developerId: string, page: number = 1, pageSize: number = 10): Observable<any> {
+    const params = new HttpParams()
+      .set('key', this.apiKey)
+      .set('developers', developerId)
+      .set('page', page.toString())
+      .set('page_size', pageSize.toString());
+    const url = `${this.apiUrl}/games`;
+    return this.http.get<any>(url, { params });
+  }
+
+  getGamesByPublisher(publisherId: string, page: number = 1, pageSize: number = 10): Observable<any> {
+    const params = new HttpParams()
+      .set('key', this.apiKey)
+      .set('publishers', publisherId)
+      .set('page', page.toString())
+      .set('page_size', pageSize.toString());
+    const url = `${this.apiUrl}/games`;
     return this.http.get<any>(url, { params });
   }
 

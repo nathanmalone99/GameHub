@@ -24,17 +24,39 @@ export class RecommendationService {
       switchMap((favorites: any[]) => {
         if (favorites.length === 0) return of([]);
 
-        const similarGamesRequests = favorites.map((game: any) =>
-          this.rawgService.getSimilarGames(game.id)
-        );
-        return forkJoin(similarGamesRequests);
-      }),
-      map((similarGamesArrays: any[]) => {
-        const recommendations: any[] = [];
-        similarGamesArrays.forEach((similarGames: any) => {
-          recommendations.push(...similarGames.results);
+        const genreIds = new Set<string>();
+        const developerIds = new Set<string>();
+        const publisherIds = new Set<string>();
+
+        favorites.forEach((game: any) => {
+          if (game.genres) {
+            game.genres.forEach((genre: any) => genreIds.add(genre.id));
+          }
+          if (game.developers) {
+            game.developers.forEach((developer: any) => developerIds.add(developer.id));
+          }
+          if (game.publishers) {
+            game.publishers.forEach((publisher: any) => publisherIds.add(publisher.id));
+          }
         });
-        // Remove duplicates
+
+        const genreRequests = Array.from(genreIds).map(genreId =>
+          this.rawgService.getGamesByGenre(genreId)
+        );
+        const developerRequests = Array.from(developerIds).map(developerId =>
+          this.rawgService.getGamesByDeveloper(developerId)
+        );
+        const publisherRequests = Array.from(publisherIds).map(publisherId =>
+          this.rawgService.getGamesByPublisher(publisherId)
+        );
+
+        return forkJoin([...genreRequests, ...developerRequests, ...publisherRequests]);
+      }),
+      map((recommendationsArrays: any[]) => {
+        const recommendations: any[] = [];
+        recommendationsArrays.forEach((games: any) => {
+          recommendations.push(...games.results);
+        });
         const uniqueRecommendations = recommendations.filter(
           (v, i, a) => a.findIndex((t) => t.id === v.id) === i
         );
