@@ -46,5 +46,13 @@ export class AuthService {
       throw error;
     }
   }
+
+  async logout() {
+    try {
+      await this.afAuth.signOut();
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
