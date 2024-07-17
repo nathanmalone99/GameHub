@@ -24,6 +24,8 @@ export class RecommendationService {
       switchMap((favorites: any[]) => {
         if (favorites.length === 0) return of([]);
 
+        const favoriteGameIds = new Set(favorites.map(game => game.id));
+        
         const genreIds = new Set<string>();
         const developerIds = new Set<string>();
         const publisherIds = new Set<string>();
@@ -50,17 +52,19 @@ export class RecommendationService {
           this.rawgService.getGamesByPublisher(publisherId)
         );
 
-        return forkJoin([...genreRequests, ...developerRequests, ...publisherRequests]);
-      }),
-      map((recommendationsArrays: any[]) => {
-        const recommendations: any[] = [];
-        recommendationsArrays.forEach((games: any) => {
-          recommendations.push(...games.results);
-        });
-        const uniqueRecommendations = recommendations.filter(
-          (v, i, a) => a.findIndex((t) => t.id === v.id) === i
+        return forkJoin([...genreRequests, ...developerRequests, ...publisherRequests]).pipe(
+          map((recommendationsArrays: any[]) => {
+            const recommendations: any[] = [];
+            recommendationsArrays.forEach((games: any) => {
+              recommendations.push(...games.results);
+            });
+            // Remove duplicates and already favorited games
+            const uniqueRecommendations = recommendations.filter(
+              (v, i, a) => a.findIndex((t) => t.id === v.id) === i && !favoriteGameIds.has(v.id)
+            );
+            return uniqueRecommendations;
+          })
         );
-        return uniqueRecommendations;
       })
     );
   }
