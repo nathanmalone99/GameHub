@@ -2,13 +2,18 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private afAuth: AngularFireAuth, private firestore: AngularFirestore) { }
+  user$: Observable<firebase.User | null>;
+
+  constructor(private afAuth: AngularFireAuth, private firestore: AngularFirestore) {
+    this.user$ = this.afAuth.authState;
+  }
 
   async register(email: string, password: string) {
     try {
@@ -42,3 +47,4 @@ export class AuthService {
     }
   }
 }
+

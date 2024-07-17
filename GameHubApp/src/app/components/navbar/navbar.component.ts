@@ -26,6 +26,10 @@ export class NavbarComponent {
     this.router.navigate(['/favourites']);
   }
 
+  goToRecoomendationsPage() {
+    this.router.navigate(['/recommendation']);
+  }
+
   goToCartPage() {
     this.router.navigate(['/cart']);
   }

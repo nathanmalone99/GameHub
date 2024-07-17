@@ -33,6 +33,12 @@ export class RawgService {
     return this.http.get<any>(url, { params });
   }
 
+  getSimilarGames(gameId: string): Observable<any> {
+    const params = new HttpParams().set('key', this.apiKey);
+    const url = `${this.apiUrl}/games/${gameId}/suggested`;
+    return this.http.get<any>(url, { params });
+  }
+
   getGameAchievements(gameId: string, page: number = 1): Observable<any> {
     const params = new HttpParams()
       .set('key', this.apiKey)

@@ -1,13 +1,33 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>recommendation</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<app-navbar>
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">recommendation</ion-title>
-    </ion-toolbar>
+      <ion-title>Recommended Games</ion-title>
+      </ion-toolbar>
   </ion-header>
+</app-navbar>
+
+<ion-content>
+  <ion-grid>
+    <ion-row *ngIf="recommendedGames.length > 0">
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let game of recommendedGames">
+        <ion-card (click)="goToGameDetails(game.id)">
+          <img [src]="game.background_image" class="card-img-top" alt="{{ game.name }}" />
+          <ion-card-header>
+            <ion-card-title>{{ game.name }}</ion-card-title>
+            <ion-card-subtitle>{{ game.released }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-button expand="block" color="primary" (click)="addToFavorites(game); $event.stopPropagation();">
+              Add to Favorites
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="recommendedGames.length === 0">
+      <ion-col size="12" class="ion-text-center">
+        <p>No recommendations available.</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
