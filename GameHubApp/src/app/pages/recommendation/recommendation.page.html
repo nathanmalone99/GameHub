@@ -1,33 +1,30 @@
-<app-navbar>
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Recommended Games</ion-title>
-      </ion-toolbar>
-  </ion-header>
-</app-navbar>
+<app-navbar></app-navbar>
 
 <ion-content>
-  <ion-grid>
-    <ion-row *ngIf="recommendedGames.length > 0">
-      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let game of recommendedGames">
-        <ion-card (click)="goToGameDetails(game.id)">
-          <img [src]="game.background_image" class="card-img-top" alt="{{ game.name }}" />
-          <ion-card-header>
-            <ion-card-title>{{ game.name }}</ion-card-title>
-            <ion-card-subtitle>{{ game.released }}</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            <ion-button expand="block" color="primary" (click)="addToFavorites(game); $event.stopPropagation();">
-              Add to Favorites
-            </ion-button>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-    <ion-row *ngIf="recommendedGames.length === 0">
-      <ion-col size="12" class="ion-text-center">
+  <div class="container">
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <h2 class="page-title">Recommended Games</h2>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-6 col-lg-4 mb-4" *ngFor="let game of recommendedGames">
+        <div class="card h-100 fixed-card" (click)="goToGameDetails(game.id)">
+          <img [src]="game.background_image" class="card-img-top fixed-image" alt="{{ game.name }}" />
+          <div class="card-body d-flex flex-column justify-content-center align-items-center">
+            <h5 class="card-title">{{ game.name }}</h5>
+            <p class="card-text">{{ game.released }}</p>
+            <button (click)="addToFavorites(game); $event.stopPropagation();" class="btn btn-outline-primary">Add to Favorites</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center" *ngIf="recommendedGames.length === 0">
+      <div class="col-12 text-center">
         <p>No recommendations available.</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+      </div>
+    </div>
+  </div>
 </ion-content>
