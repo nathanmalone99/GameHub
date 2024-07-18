@@ -39,7 +39,11 @@ const routes: Routes = [
   {
     path: 'storefront',
     loadChildren: () => import('./pages/storefront/storefront.module').then( m => m.StorefrontPageModule)
+  },  {
+    path: 'orders',
+    loadChildren: () => import('./pages/orders/orders.module').then( m => m.OrdersPageModule)
   }
+
 
   /* {
     path: 'user-library',

@@ -49,6 +49,10 @@ export class NavbarComponent {
     this.router.navigate(['/storefront']);
   }
 
+  goToOrdersPage() {
+    this.router.navigate(['/orders']);
+  }
+
   goToCartPage() {
     this.router.navigate(['/cart']);
   }
