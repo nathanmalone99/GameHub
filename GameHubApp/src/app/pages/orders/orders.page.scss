@@ -1,0 +1,55 @@
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 15px;
+  }
+  
+  .card {
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  }
+  
+  .card-img-top {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    object-fit: cover;
+    height: 200px;
+  }
+  
+  .card-body {
+    text-align: center;
+  }
+  
+  .row.mb-4 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .mt-4 {
+    margin-top: 1.5rem;
+  }
+  
+  .h2, .h4, .h5 {
+    margin-bottom: 1rem;
+  }
+  
+  .p-3 {
+    padding: 1rem;
+  }
+  
+  .order-summary {
+    cursor: pointer;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 0.5rem;
+  }
+  
+  .order-summary:hover {
+    background-color: #e9ecef;
+  }
+  
+  .order-details {
+    padding-top: 15px;
+    border-top: 1px solid #e9ecef;
+  }
+  

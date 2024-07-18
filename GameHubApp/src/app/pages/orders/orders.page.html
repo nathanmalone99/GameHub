@@ -1,30 +1,48 @@
-<app-navbar></app-navbar>
-
-<ion-header>
-  <ion-toolbar>
-    <ion-title>My Orders</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-navbar>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>My Orders</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</app-navbar>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let order of orders">
-      <ion-label>
-        <h2>Order ID: {{ order.id }}</h2>
-        <p>Status: {{ order.status }}</p>
-        <p>Total: €{{ (order.amount / 100).toFixed(2) }}</p>
-        <ion-list>
-          <ion-item *ngFor="let item of order.items">
-            <ion-thumbnail slot="start">
-              <img [src]="item.background_image" />
-            </ion-thumbnail>
-            <ion-label>
-              <h3>{{ item.name }}</h3>
-              <p>Price: €{{ item.price }}</p>
-            </ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="mb-4">My Orders</h2>
+      </div>
+    </div>
+    <div *ngFor="let order of orders; let i = index" class="row mb-4">
+      <div class="col-12">
+        <div class="card p-3">
+          <div (click)="toggleOrderDetails(i)" class="order-summary">
+            <h4>Order ID: {{ order.id }}</h4>
+            <p>Status: {{ order.status }}</p>
+            <p>Total: €{{ (order.amount / 100).toFixed(2) }}</p>
+          </div>
+          <div *ngIf="expandedOrders[i]" class="order-details mt-3">
+            <div class="row">
+              <div
+                *ngFor="let item of order.items"
+                class="col-12 col-md-6 col-lg-4 mb-3"
+              >
+                <div class="card h-100">
+                  <img
+                    [src]="item.background_image"
+                    class="card-img-top"
+                    alt="{{ item.name }}"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    <p class="card-text">Price: €{{ item.price }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>
