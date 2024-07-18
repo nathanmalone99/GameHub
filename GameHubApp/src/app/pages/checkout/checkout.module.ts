@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+/* import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -20,3 +20,4 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
   declarations: [CheckoutPage]
 })
 export class CheckoutPageModule {}
+ */

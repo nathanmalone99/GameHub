@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
+import { StripeService } from 'src/app/services/stripe.service';
+import firebase from 'firebase/compat/app';
+
 
 @Component({
   selector: 'app-cart',
@@ -12,20 +17,21 @@ export class CartPage implements OnInit {
   cartItems: any[] = [];
   total: number = 0;
   cartSubscription: Subscription | null = null;
+  user: firebase.User | null = null;
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private stripeService: StripeService, private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    console.log('CartPage: ngOnInit');
+    this.authService.user$.subscribe(user => {
+      this.user = user;
+    });
     this.cartSubscription = this.cartService.cart$.subscribe((items) => {
       this.cartItems = items;
       this.calculateTotal();
-      console.log('CartPage: Cart updated', this.cartItems);
     });
   }
 
   ngOnDestroy() {
-    console.log('CartPage: ngOnDestroy');
     if (this.cartSubscription) {
       this.cartSubscription.unsubscribe();
     }
@@ -35,7 +41,6 @@ export class CartPage implements OnInit {
     this.cartService.clearCart();
     this.cartItems = [];
     this.calculateTotal();
-    console.log('CartPage: Cart cleared');
   }
 
   removeGame(gameId: number) {
@@ -44,6 +49,18 @@ export class CartPage implements OnInit {
 
   calculateTotal() {
     this.total = this.cartItems.reduce((sum, item) => sum + parseFloat(item.price), 0);
-    console.log('CartPage: Total calculated', this.total);
+  }
+
+  async proceedToCheckout() {
+    if (!this.user) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    try {
+      await this.stripeService.createCheckoutSession(this.cartItems, this.user.uid);
+    } catch (error) {
+      console.error('Checkout error:', error);
+    }
   }
 }

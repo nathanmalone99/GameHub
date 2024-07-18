@@ -15,10 +15,11 @@ const routes: Routes = [
   {
     path: 'achievements/:id',
     loadChildren: () => import('./pages/achievements/achievements.module').then( m => m.AchievementsPageModule)
-  },  {
+  },
+  /* {
     path: 'checkout',
     loadChildren: () => import('./pages/checkout/checkout.module').then( m => m.CheckoutPageModule)
-  },
+  }, */
   {
     path: 'success',
     loadChildren: () => import('./pages/success/success.module').then( m => m.SuccessPageModule)
@@ -27,13 +28,17 @@ const routes: Routes = [
     path: 'cancel',
     loadChildren: () => import('./pages/cancel/cancel.module').then( m => m.CancelPageModule)
   },
-  {
+  /* {
     path: 'custom-checkout',
     loadChildren: () => import('./pages/custom-checkout/custom-checkout.module').then( m => m.CustomCheckoutPageModule)
-  },
+  }, */
   {
     path: 'recommendation',
     loadChildren: () => import('./pages/recommendation/recommendation.module').then( m => m.RecommendationPageModule)
+  },
+  {
+    path: 'storefront',
+    loadChildren: () => import('./pages/storefront/storefront.module').then( m => m.StorefrontPageModule)
   }
 
   /* {

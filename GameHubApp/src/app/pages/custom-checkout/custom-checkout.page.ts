@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/* import { Component, OnInit } from '@angular/core';
 import { Stripe, StripeCardElement  } from '@stripe/stripe-js';
 import { CartService } from 'src/app/services/cart.service';
 import { StripeService } from 'src/app/services/stripe.service';
@@ -57,3 +57,4 @@ export class CustomCheckoutPage implements OnInit {
     }
   }
 }
+ */

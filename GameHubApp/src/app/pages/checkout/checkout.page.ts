@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/* import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { StripeService } from 'src/app/services/stripe.service';
 
@@ -27,3 +27,4 @@ export class CheckoutPage implements OnInit {
     await this.stripeService.redirectToCheckout(this.cartItems);
   }
 }
+ */
