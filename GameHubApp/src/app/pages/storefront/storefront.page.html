@@ -1,13 +1,96 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>storefront</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-navbar></app-navbar>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">storefront</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="container">
+    <!-- Filter Inputs -->
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <input type="text" [(ngModel)]="filters.search" placeholder="Search games..." class="form-control search-input" />
+      </div>
+      <div class="col-md-3">
+        <select [(ngModel)]="filters.genres" class="form-control genre-select">
+          <option value="">All Genres</option>
+          <option value="4">Action</option>
+          <option value="51">Indie</option>
+          <option value="3">Adventure</option>
+          <option value="5">RPG</option>
+          <option value="10">Strategy</option>
+          <option value="2">Shooter</option>
+          <option value="14">Simulation</option>
+          <option value="7">Puzzle</option>
+          <option value="11">Arcade</option>
+          <option value="83">Platformer</option>
+          <option value="1">Racing</option>
+          <option value="15">Sports</option>
+          <option value="6">Fighting</option>
+          <option value="19">Family</option>
+          <option value="28">Board Games</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <select [(ngModel)]="filters.platforms" class="form-control platform-select">
+          <option value="">All Platforms</option>
+          <option value="4">PC</option>
+          <option value="187">PlayStation 5</option>
+          <option value="18">PlayStation 4</option>
+          <option value="1">Xbox One</option>
+          <option value="186">Xbox Series S/X</option>
+          <option value="7">Nintendo Switch</option>
+          <option value="3">iOS</option>
+          <option value="21">Android</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <select [(ngModel)]="filters.ordering" class="form-control ordering-select">
+          <option value="">Default Ordering</option>
+          <option value="name">Name</option>
+          <option value="-released">Released (Newest)</option>
+          <option value="released">Released (Oldest)</option>
+          <option value="-rating">Rating (Highest)</option>
+          <option value="rating">Rating (Lowest)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6 text-right">
+        <button (click)="applyFilters()" class="btn btn-primary apply-filters-btn">Apply Filters</button>
+      </div>
+      <div class="col-md-6 text-left">
+        <button (click)="clearFilters()" class="btn btn-secondary clear-filters-btn">Clear Filters</button>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-6 col-lg-4 mb-4" *ngFor="let game of games">
+        <div class="card h-100 fixed-card">
+          <img [src]="game.background_image" class="card-img-top fixed-image" alt="{{ game.name }}" />
+          <div class="card-body d-flex flex-column justify-content-center align-items-center">
+            <h5 class="card-title">{{ game.name }}</h5>
+            <p class="card-text">{{ game.released }}</p>
+            <button (click)="addToCart(game); $event.stopPropagation();" class="btn btn-outline-success mt-2">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination custom-pagination">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="goToFirstPage()">First</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="goToPreviousPage()">Previous</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="goToNextPage()">Next</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="goToLastPage()">Last</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 </ion-content>

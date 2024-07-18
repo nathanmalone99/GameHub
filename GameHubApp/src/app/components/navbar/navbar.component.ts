@@ -45,6 +45,10 @@ export class NavbarComponent {
     this.router.navigate(['/recommendation']);
   }
 
+  goToStoresPage() {
+    this.router.navigate(['/storefront']);
+  }
+
   goToCartPage() {
     this.router.navigate(['/cart']);
   }

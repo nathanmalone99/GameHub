@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { StorefrontPageRoutingModule } from './storefront-routing.module';
 
 import { StorefrontPage } from './storefront.page';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     StorefrontPageRoutingModule
   ],
   declarations: [StorefrontPage]

@@ -2,6 +2,7 @@
 
 <ion-content>
   <div class="container">
+    <!-- Filter Inputs -->
     <div class="row mb-3">
       <div class="col-md-3">
         <input type="text" [(ngModel)]="filters.search" placeholder="Search games..." class="form-control search-input" />
@@ -50,6 +51,7 @@
         </select>
       </div>
     </div>
+
     <div class="row mb-3">
       <div class="col-md-6 text-right">
         <button (click)="applyFilters()" class="btn btn-primary apply-filters-btn">Apply Filters</button>
@@ -67,13 +69,12 @@
             <h5 class="card-title">{{ game.name }}</h5>
             <p class="card-text">{{ game.released }}</p>
             <button (click)="addToFavorites(game); $event.stopPropagation();" class="btn btn-outline-primary">Add to Favorites</button>
-            <button (click)="addToCart(game); $event.stopPropagation();" class="btn btn-outline-success mt-2">Add to Cart</button>
             <button (click)="goToAchievements(game.id); $event.stopPropagation();" class="btn btn-outline-secondary mt-2">View Achievements</button>
           </div>
         </div>
       </div>
     </div>
-    
+
     <div class="row justify-content-center">
       <nav aria-label="Page navigation example">
         <ul class="pagination custom-pagination">

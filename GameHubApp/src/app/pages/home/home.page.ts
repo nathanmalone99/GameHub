@@ -99,20 +99,6 @@ export class HomePage {
     });
   }
 
-  addToCart(game: any) {
-    const gameWithPrice = { ...game, price: this.generateRandomPriceInEuros() };
-    this.cartService.addToCart(gameWithPrice);
-    console.log('Added to cart with price:', gameWithPrice.price);
-  }
-  
-  generateRandomPriceInEuros() {
-    const min = 20;
-    const max = 60;
-    const priceInDollars = Math.random() * (max - min) + min;
-    const priceInEuros = (priceInDollars * 0.85).toFixed(2);
-    return priceInEuros;
-  }
-
   goToGameDetails(gameId: string) {
     this.router.navigate(['/game-details', gameId]);
   }
