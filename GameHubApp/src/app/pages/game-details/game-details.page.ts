@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RawgService } from 'src/app/services/rawg.service';
+import firebase from 'firebase/compat/app';
+import { ReviewService } from 'src/app/services/review.service';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-game-details',
@@ -14,23 +18,35 @@ export class GameDetailsPage implements OnInit {
   gameAdditions: any[] = [];
   gameScreenshots: any[] = [];
   gameMovies: any[] = [];
-  gameId: string | null = null;
+  gameId: string = '';
   page: number = 1;
   pageSize: number = 10;
+  reviews: any[] = [];
+  reviewText: string = '';
+  user: firebase.User | null = null;
 
   constructor(
     private route: ActivatedRoute,
     private rawgService: RawgService,
-    private router: Router
+    private router: Router,
+    private reviewService: ReviewService,
+    private authService: AuthService
+
   ) {}
 
   ngOnInit() {
-    this.gameId = this.route.snapshot.paramMap.get('id');
-    if (this.gameId) {
-      this.loadGameDetails(this.gameId);
-      this.loadGameAdditions(this.gameId);
-      this.loadGameScreenshots(this.gameId);
-      // this.loadGameMovies(this.gameId);
+    this.authService.user$.subscribe(user => {
+      this.user = user;
+    });
+
+    const gameId = this.route.snapshot.paramMap.get('id');
+    if (gameId) {
+      this.gameId = gameId;
+      this.loadGameDetails(gameId);
+      this.loadGameAdditions(gameId);
+      this.loadGameScreenshots(gameId);
+      this.loadReviews(gameId);
+      // this.loadGameMovies(gameId);
     } else {
       console.error('Game ID is null');
     }
@@ -56,6 +72,36 @@ export class GameDetailsPage implements OnInit {
   loadGameScreenshots(gameId: string) {
     this.rawgService.getGameScreenshots(gameId, this.page, this.pageSize).subscribe((data) => {
       this.gameScreenshots = data.results;
+    });
+  }
+
+  loadReviews(gameId: string) {
+    this.reviewService.getReviews(gameId).subscribe(reviews => {
+      this.reviews = reviews;
+    });
+  }
+
+  submitReview() {
+    if (!this.user) {
+      alert('You must be logged in to submit a review.');
+      return;
+    }
+
+    if (!this.gameId) {
+      console.error('Game ID is null');
+      return;
+    }
+
+    const review = {
+      gameId: this.gameId,
+      text: this.reviewText,
+      userEmail: this.user.email,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+
+    this.reviewService.submitReview(review).then(() => {
+      this.reviewText = '';
+      this.loadReviews(this.gameId);
     });
   }
 
