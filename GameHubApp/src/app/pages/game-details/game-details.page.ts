@@ -23,6 +23,7 @@ export class GameDetailsPage implements OnInit {
   pageSize: number = 10;
   reviews: any[] = [];
   reviewText: string = '';
+  rating: number = 0;
   user: firebase.User | null = null;
 
   constructor(
@@ -95,14 +96,25 @@ export class GameDetailsPage implements OnInit {
     const review = {
       gameId: this.gameId,
       text: this.reviewText,
+      rating: this.rating,
       userEmail: this.user.email,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     };
 
+    console.log('Submitting review:', review);
+
     this.reviewService.submitReview(review).then(() => {
+      console.log('Review submitted successfully');
       this.reviewText = '';
+      this.rating = 0;
       this.loadReviews(this.gameId);
+    }).catch(error => {
+      console.error('Error submitting review:', error);
     });
+  }
+
+  setRating(rating: number) {
+    this.rating = rating;
   }
 
   /* loadGameMovies(gameId: string) {

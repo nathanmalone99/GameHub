@@ -84,6 +84,17 @@
       <div class="form-group">
         <textarea [(ngModel)]="reviewText" name="reviewText" class="form-control" rows="3" placeholder="Write your review here..."></textarea>
       </div>
+      <div class="form-group">
+        <label>Rating:</label>
+        <ion-row>
+          <ion-col size="2" *ngFor="let star of [1,2,3,4,5]">
+            <ion-icon 
+              [name]="star <= rating ? 'star' : 'star-outline'" 
+              (click)="setRating(star)">
+            </ion-icon>
+          </ion-col>
+        </ion-row>
+      </div>
       <button type="submit" class="btn btn-primary mt-2">Submit Review</button>
     </form>
 
@@ -91,6 +102,13 @@
     <div *ngIf="reviews.length > 0; else noReviews">
       <div *ngFor="let review of reviews" class="review">
         <p>{{ review.text }}</p>
+        <p>
+          <ion-row>
+            <ion-col size="2" *ngFor="let star of [1,2,3,4,5]">
+              <ion-icon [name]="star <= review.rating ? 'star' : 'star-outline'"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </p>
         <p><strong>By:</strong> {{ review.userEmail }}</p>
       </div>
     </div>

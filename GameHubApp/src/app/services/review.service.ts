@@ -14,7 +14,7 @@ export class ReviewService {
   }
 
   submitReview(review: any): Promise<void> {
-    const id = this.firestore.createId();
+    const id = `${review.gameId}_${review.userEmail}`;
     return this.firestore.collection('reviews').doc(id).set(review);
   }
 }
