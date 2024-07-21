@@ -1,20 +1,28 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
-    </ion-buttons>
-    <ion-title>{{ game?.name }}</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-navbar>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home"></ion-back-button>
+      </ion-buttons>
+      <ion-title>{{ game?.name }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</app-navbar>
 
 <ion-content>
   <div class="container">
     <div class="d-flex justify-content-center">
       <div class="game-card">
-        <img [src]="game?.background_image" class="game-image" alt="{{ game?.name }}">
+        <img
+          [src]="game?.background_image"
+          class="game-image"
+          alt="{{ game?.name }}"
+        />
         <div class="card-body">
           <h5 class="card-title">{{ game?.name }}</h5>
-          <p class="card-text"><strong>Released:</strong> {{ game?.released }}</p>
+          <p class="card-text">
+            <strong>Released:</strong> {{ game?.released }}
+          </p>
           <p class="card-text">{{ game?.description_raw }}</p>
         </div>
       </div>
@@ -24,32 +32,30 @@
     <div *ngIf="gameAdditions.length > 0; else noAdditions">
       <div *ngFor="let addition of gameAdditions" class="addition-item">
         <div class="addition-avatar">
-          <img [src]="addition.background_image" alt="{{ addition.name }}">
+          <img [src]="addition.background_image" alt="{{ addition.name }}" />
         </div>
         <div class="addition-details">
           <div class="addition-name">{{ addition.name }}</div>
-          <div class="addition-released"><strong>Released:</strong> {{ addition.released }}</div>
+          <div class="addition-released">
+            <strong>Released:</strong> {{ addition.released }}
+          </div>
         </div>
       </div>
     </div>
 
     <ng-template #noAdditions>
-      <div class="alert alert-warning" role="alert">
-        No Additions Found
-      </div>
+      <div class="alert alert-warning" role="alert">No Additions Found</div>
     </ng-template>
 
     <h2>Screenshots</h2>
     <div *ngIf="gameScreenshots.length > 0; else noScreenshots">
       <div *ngFor="let screenshot of gameScreenshots" class="screenshot-item">
-        <img [src]="screenshot.image" alt="Screenshot">
+        <img [src]="screenshot.image" alt="Screenshot" />
       </div>
     </div>
 
     <ng-template #noScreenshots>
-      <div class="alert alert-warning" role="alert">
-        No Screenshots Found
-      </div>
+      <div class="alert alert-warning" role="alert">No Screenshots Found</div>
     </ng-template>
 
     <!-- <h2>Movie Previews</h2>
@@ -68,29 +74,33 @@
 
     <h2>Tags</h2>
     <div *ngIf="gameTags.length > 0; else noTags">
-      <div *ngFor="let tag of gameTags" class="tag-item">
-        {{ tag.name }}
-      </div>
+      <div *ngFor="let tag of gameTags" class="tag-item">{{ tag.name }}</div>
     </div>
 
     <ng-template #noTags>
-      <div class="alert alert-warning" role="alert">
-        No Tags Found
-      </div>
+      <div class="alert alert-warning" role="alert">No Tags Found</div>
     </ng-template>
 
     <h2>Leave a Review</h2>
     <form (ngSubmit)="submitReview()">
       <div class="form-group">
-        <textarea [(ngModel)]="reviewText" name="reviewText" class="form-control" rows="3" placeholder="Write your review here..."></textarea>
+        <textarea
+          [(ngModel)]="reviewText"
+          name="reviewText"
+          class="form-control"
+          rows="3"
+          placeholder="Write your review here..."
+        ></textarea>
       </div>
       <div class="form-group">
         <label>Rating:</label>
         <ion-row>
           <ion-col size="2" *ngFor="let star of [1,2,3,4,5]">
-            <ion-icon 
-              [name]="star <= rating ? 'star' : 'star-outline'" 
-              (click)="setRating(star)">
+            <ion-icon
+              [name]="star <= rating ? 'star' : 'star-outline'"
+              (click)="setRating(star)"
+              class="star-icon"
+            >
             </ion-icon>
           </ion-col>
         </ion-row>
@@ -101,22 +111,23 @@
     <h2>Reviews</h2>
     <div *ngIf="reviews.length > 0; else noReviews">
       <div *ngFor="let review of reviews" class="review">
-        <p>{{ review.text }}</p>
+        <p><strong>By:</strong> {{ review.userEmail }}</p>
         <p>
           <ion-row>
             <ion-col size="2" *ngFor="let star of [1,2,3,4,5]">
-              <ion-icon [name]="star <= review.rating ? 'star' : 'star-outline'"></ion-icon>
+              <ion-icon
+                [name]="star <= review.rating ? 'star' : 'star-outline'"
+                class="star-icon"
+              ></ion-icon>
             </ion-col>
           </ion-row>
         </p>
-        <p><strong>By:</strong> {{ review.userEmail }}</p>
+        <p>{{ review.text }}</p>
       </div>
     </div>
 
     <ng-template #noReviews>
-      <div class="alert alert-warning" role="alert">
-        No Reviews Found
-      </div>
+      <div class="alert alert-warning" role="alert">No Reviews Found</div>
     </ng-template>
 
     <ng-template #loading>

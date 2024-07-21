@@ -126,15 +126,6 @@
     border-radius: 10px;
   }
 
-  /* .movie-item {
-    margin: 20px 0;
-  }
-
-  .movie-preview {
-    width: 100%;
-    border-radius: 10px;
-  } */
-
   .tag-item {
     display: inline-block;
     background-color: #e0e0e0;
@@ -143,5 +134,9 @@
     margin: 5px;
     font-size: 14px;
     color: #333;
+  }
+
+  .star-icon {
+    color: yellow;
   }
 }
