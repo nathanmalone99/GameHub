@@ -4,13 +4,12 @@ export const environment = {
   firebaseFunctionUrl: 'https://europe-west1-gamehub-e4466.cloudfunctions.net/createPaymentIntent',
   
   firebase: {
-    apiKey: "AIzaSyAzSwu7Jjb5yWlKjP21bLwj3uKti4qf_9k",
-    authDomain: "gamehub-e4466.firebaseapp.com",
-    projectId: "gamehub-e4466",
-    storageBucket: "gamehub-e4466.appspot.com",
-    messagingSenderId: "837968484208",
-    appId: "1:837968484208:web:28b943a8f7bc829e66a1b5",
-    measurementId: "G-C9T3D73HW7"
+    apiKey: "AIzaSyD6TzPnV53InvLGillohpmqiczgsAu-tyU",
+  authDomain: "gamehub2-f7680.firebaseapp.com",
+  projectId: "gamehub2-f7680",
+  storageBucket: "gamehub2-f7680.appspot.com",
+  messagingSenderId: "996580759380",
+  appId: "1:996580759380:web:912ac59c1e1beb58c81ac1"
   },
   rawgApiKey: '6f16f1bd149e41ae9eaf8f3a0a394e5b'
 };

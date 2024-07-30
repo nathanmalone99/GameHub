@@ -1,11 +1,13 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Achievements</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-navbar>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Achievements</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</app-navbar>
 
 <ion-content>
   <div class="d-flex justify-content-center align-items-center h-100">
@@ -15,13 +17,14 @@
         <ion-list *ngIf="achievements.length > 0; else noAchievements">
           <ion-item *ngFor="let achievement of achievements">
             <ion-avatar slot="start">
-              <img [src]="achievement.image" alt="{{ achievement.name }}">
+              <img [src]="achievement.image" alt="{{ achievement.name }}" />
             </ion-avatar>
             <ion-label>
               <h2>{{ achievement.name }}</h2>
               <p>{{ achievement.description }}</p>
               <p><strong>Percent:</strong> {{ achievement.percent }}%</p>
             </ion-label>
+            <ion-checkbox slot="end" [checked]="achievement.completed" (ionChange)="toggleAchievementCompletion(achievement)"></ion-checkbox>
           </ion-item>
         </ion-list>
         <ng-template #noAchievements>
