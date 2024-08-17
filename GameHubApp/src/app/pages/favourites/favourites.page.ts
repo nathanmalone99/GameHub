@@ -23,11 +23,18 @@ export class FavouritesPage implements OnInit {
     });
   }
 
-  removeFromFavorites(gameId: string) {
-    this.favouritesService.removeFromFavorites(gameId).subscribe(() => {
+  removeFromFavorites(gameId: string | number) {
+    console.log(typeof gameId);
+    this.favouritesService.removeFromFavorites(gameId.toString()).subscribe(() => {
       this.loadFavorites();
     });
-  }
+}
+
+  updateGameStatus(gameId: string | number, status: string) {
+    this.favouritesService.updateGameStatus(gameId.toString(), status).subscribe(() => {
+      this.loadFavorites();
+    });
+}
 
   goToGameDetails(gameId: string) {
     this.router.navigate(['/game-details', gameId]);

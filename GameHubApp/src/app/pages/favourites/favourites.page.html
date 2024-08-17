@@ -2,7 +2,7 @@
   <ion-header>
     <ion-toolbar>
       <ion-title>Favorites</ion-title>
-      </ion-toolbar>
+    </ion-toolbar>
   </ion-header>
 </app-navbar>
 
@@ -17,12 +17,23 @@
             <ion-card-subtitle>{{ game.released }}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            <ion-button expand="block" color="danger" (click)="removeFromFavorites(game.id)">
+            <ion-button expand="block" color="danger" (click)="removeFromFavorites(game.id); $event.stopPropagation();">
               Remove from Favorites
             </ion-button>
-            <ion-button expand="block" color="primary" (click)="goToAchievements(game.id)">
+            <ion-button expand="block" color="primary" (click)="goToAchievements(game.id); $event.stopPropagation();">
               View Achievements
             </ion-button>
+
+            <!-- Game Status Dropdown -->
+            <ion-item (click)="$event.stopPropagation()">
+              <ion-label>Status</ion-label>
+              <ion-select [(ngModel)]="game.status" (ionChange)="updateGameStatus(game.id, game.status)">
+                <ion-select-option value="Complete">Complete</ion-select-option>
+                <ion-select-option value="In Progress">In Progress</ion-select-option>
+                <ion-select-option value="To Do">To Do</ion-select-option>
+              </ion-select>
+            </ion-item>
+
           </ion-card-content>
         </ion-card>
       </ion-col>
