@@ -26,12 +26,9 @@ export class AchievementsPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Subscribe to get the currently authenticated user
     this.authService.user$.subscribe(user => {
       this.user = user;
     });
-
-    // Retrieve the gameId from the route parameters
     this.gameId = this.route.snapshot.paramMap.get('id');
     if (this.gameId) {
       this.loadAchievements();
@@ -42,7 +39,6 @@ export class AchievementsPage implements OnInit {
     if (this.gameId) {
       this.rawgService.getGameAchievements(this.gameId, page).subscribe(data => {
         this.achievements = this.achievements.concat(data.results);
-        // Load user's completed achievements after loading all achievements
         if (data.next) {
           this.loadAchievements(page + 1);
         } else {
