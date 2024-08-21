@@ -13,9 +13,16 @@ export class CartService {
 
   addToCart(game: any) {
     const currentCart = this.cart.value;
-    currentCart.push(game);
-    this.cart.next(currentCart);
-    console.log('CartService: Added game to cart', game);
+    const gameExists = currentCart.find(item => item.id === game.id);
+
+    if (!gameExists) {
+      currentCart.push(game);
+      this.cart.next(currentCart);
+      console.log('CartService: Added game to cart', game);
+    } else {
+      console.log('CartService: Game with this ID already in cart', game);
+    }
+
     console.log('CartService: Current cart', this.cart.value);
   }
 
