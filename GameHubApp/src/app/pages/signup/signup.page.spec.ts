@@ -8,6 +8,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import firebase from 'firebase/compat/app';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 describe('SignupPage', () => {
   let component: SignupPage;
@@ -23,7 +24,11 @@ describe('SignupPage', () => {
 
     await TestBed.configureTestingModule({
       declarations: [SignupPage],
-      imports: [IonicModule.forRoot(), FormsModule],
+      imports: [
+        IonicModule.forRoot(), 
+        FormsModule, 
+        SharedModule
+      ],
       providers: [
         { provide: AuthService, useValue: authSpy },
         { provide: NavController, useValue: navSpy },
@@ -33,7 +38,6 @@ describe('SignupPage', () => {
       ]
     }).compileComponents();
 
-    console.log('Firebase Config:', environment.firebase); 
     fixture = TestBed.createComponent(SignupPage);
     component = fixture.componentInstance;
     authServiceSpy = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;

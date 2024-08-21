@@ -3,6 +3,8 @@ import { IonicModule, NavController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginPage } from './login.page';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 
 describe('LoginPage', () => {
   let component: LoginPage;
@@ -20,6 +22,7 @@ describe('LoginPage', () => {
     };
 
     TestBed.configureTestingModule({
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [LoginPage],
       imports: [IonicModule.forRoot(), FormsModule],
       providers: [

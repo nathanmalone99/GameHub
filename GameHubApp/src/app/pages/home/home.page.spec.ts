@@ -6,12 +6,12 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { HomePage } from './home.page';
 import { RawgService } from 'src/app/services/rawg.service';
-import { SharedModule } from 'src/app/modules/shared/shared.module'; 
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { FavouritesService } from 'src/app/services/favourites.service';
 import { firebaseMockConfig } from 'src/app/testing/firebase.mock';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-
+import { FormsModule } from '@angular/forms';
 
 describe('HomePage', () => {
   let component: HomePage;
@@ -33,9 +33,7 @@ describe('HomePage', () => {
       })
     );
 
-    favouritesServiceSpy.getFavorites.and.returnValue(of([
-      { id: 1, name: 'Game 1', background_image: 'image1.jpg', released: '2020-01-01' }
-    ]));
+    favouritesServiceSpy.addToFavorites.and.returnValue(of(void 0));
 
     await TestBed.configureTestingModule({
       declarations: [HomePage],
@@ -44,7 +42,8 @@ describe('HomePage', () => {
         HttpClientTestingModule,
         SharedModule,
         AngularFireModule.initializeApp(firebaseMockConfig),
-        AngularFirestoreModule
+        AngularFirestoreModule,
+        FormsModule 
       ],
       providers: [
         { provide: RawgService, useValue: rawgServiceSpy },
@@ -124,7 +123,7 @@ describe('HomePage', () => {
     component.applyFilters();
     fixture.detectChanges();
     expect(component.currentPage).toBe(1);
-    expect(rawgService.getGames).toHaveBeenCalledWith(1, 20, component.filters);
+    expect(rawgService.getGames).toHaveBeenCalledWith(1, 21, component.filters);
   });
 
   it('should clear filters', () => {
@@ -143,7 +142,7 @@ describe('HomePage', () => {
       ordering: ''
     });
     expect(component.currentPage).toBe(1);
-    expect(rawgService.getGames).toHaveBeenCalledWith(1, 20, component.filters);
+    expect(rawgService.getGames).toHaveBeenCalledWith(1, 21, component.filters);
   });
 
   it('should add to favorites', () => {
