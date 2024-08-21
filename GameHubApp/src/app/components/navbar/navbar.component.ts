@@ -1,16 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import firebase from 'firebase/compat/app';
-
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
   user$: Observable<firebase.User | null>;
   isLoggedIn: boolean = false;
@@ -22,6 +21,9 @@ export class NavbarComponent {
   ngOnInit() {
     this.user$.subscribe(user => {
       this.isLoggedIn = !!user;
+      if (!user) {
+        this.clearUserData();  // Clear user-specific data when logged out
+      }
     });
   }
 
@@ -61,9 +63,14 @@ export class NavbarComponent {
     try {
       await this.authService.logout();
       console.log('User has been logged out');
-      this.router.navigate(['/login']); // Redirect to login page after logout
+      this.clearUserData();
+      this.router.navigate(['/login']);
     } catch (error) {
       console.error('Logout error:', error);
     }
+  }
+
+  private clearUserData() {
+    localStorage.removeItem('favoriteGames');
   }
 }

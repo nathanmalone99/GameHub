@@ -50,9 +50,13 @@ export class AuthService {
   async logout() {
     try {
       await this.afAuth.signOut();
+      this.clearUserData();
     } catch (error) {
       throw error;
     }
   }
-}
 
+  private clearUserData() {
+    localStorage.removeItem('favoriteGames');
+  }
+}
