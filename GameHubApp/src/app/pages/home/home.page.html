@@ -41,6 +41,28 @@
         >
           Adventure
         </button>
+        <!-- Additional Genres -->
+        <button
+          (click)="setFilter('genres', '5')"
+          class="filter-option"
+          [ngClass]="{ 'selected': filters.genres === '5' }"
+        >
+          RPG
+        </button>
+        <button
+          (click)="setFilter('genres', '2')"
+          class="filter-option"
+          [ngClass]="{ 'selected': filters.genres === '2' }"
+        >
+          Shooter
+        </button>
+        <button
+          (click)="setFilter('genres', '7')"
+          class="filter-option"
+          [ngClass]="{ 'selected': filters.genres === '7' }"
+        >
+          Puzzle
+        </button>
       </div>
 
       <div class="filter-group">
@@ -66,6 +88,28 @@
         >
           PlayStation 5
         </button>
+        <!-- Additional Platforms -->
+        <button
+          (click)="setFilter('platforms', '18')"
+          class="filter-option"
+          [ngClass]="{ 'selected': filters.platforms === '18' }"
+        >
+          PlayStation 4
+        </button>
+        <button
+          (click)="setFilter('platforms', '1')"
+          class="filter-option"
+          [ngClass]="{ 'selected': filters.platforms === '1' }"
+        >
+          Xbox One
+        </button>
+        <button
+          (click)="setFilter('platforms', '7')"
+          class="filter-option"
+          [ngClass]="{ 'selected': filters.platforms === '7' }"
+        >
+          Nintendo Switch
+        </button>
       </div>
 
       <div class="filter-group">
@@ -90,6 +134,28 @@
           [ngClass]="{ 'selected': filters.ordering === '-released' }"
         >
           Released (Newest)
+        </button>
+        <!-- Additional Ordering Options -->
+        <button
+          (click)="setFilter('ordering', 'released')"
+          class="filter-option"
+          [ngClass]="{ 'selected': filters.ordering === 'released' }"
+        >
+          Released (Oldest)
+        </button>
+        <button
+          (click)="setFilter('ordering', '-rating')"
+          class="filter-option"
+          [ngClass]="{ 'selected': filters.ordering === '-rating' }"
+        >
+          Rating (Highest)
+        </button>
+        <button
+          (click)="setFilter('ordering', 'rating')"
+          class="filter-option"
+          [ngClass]="{ 'selected': filters.ordering === 'rating' }"
+        >
+          Rating (Lowest)
         </button>
       </div>
 

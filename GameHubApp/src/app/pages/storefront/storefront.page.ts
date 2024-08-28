@@ -91,6 +91,10 @@ export class StorefrontPage implements OnInit {
     }
   }
 
+  setFilter(type: keyof typeof this.filters, value: string) {
+    this.filters[type] = value;
+  }
+
   addToCart(game: any) {
     const gameWithPrice = { ...game, price: this.generateRandomPriceInEuros() };
     this.cartService.addToCart(gameWithPrice);

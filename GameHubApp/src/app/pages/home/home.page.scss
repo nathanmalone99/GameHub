@@ -38,6 +38,10 @@ ion-content {
   height: fit-content;
 }
 
+.search-input {
+  margin-bottom: 20px;
+}
+
 .game-cards {
   flex-grow: 1;
   max-width: calc(100% - 320px);
