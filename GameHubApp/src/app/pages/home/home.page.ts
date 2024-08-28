@@ -10,7 +10,6 @@ import { RawgService } from 'src/app/services/rawg.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
   games: any[] = [];
   currentPage = 1;
   totalPages = 0;
@@ -23,7 +22,12 @@ export class HomePage {
     ordering: ''
   };
 
-  constructor(private rawgService: RawgService, private favouritesService: FavouritesService, private router: Router, private cartService: CartService ) {}
+  constructor(
+    private rawgService: RawgService,
+    private favouritesService: FavouritesService,
+    private router: Router,
+    private cartService: CartService
+  ) {}
 
   ngOnInit() {
     this.loadGames();
@@ -71,6 +75,10 @@ export class HomePage {
       this.currentPage = page;
       this.loadGames();
     }
+  }
+
+  setFilter(type: keyof typeof this.filters, value: string) {
+    this.filters[type] = value;
   }
 
   goToFirstPage() {

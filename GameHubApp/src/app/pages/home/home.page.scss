@@ -24,30 +24,79 @@ ion-content {
   font-size: 18px;
 }
 
-/* Navbar Styling */
-.navbar {
-  background-color: #1a1a1a;
-  color: #ffffff;
-  padding: 10px 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+/* Main Content Layout */
+.main-content {
+  display: flex;
 }
 
-.navbar a {
-  color: #ffffff;
-  text-transform: uppercase;
-  padding: 10px 20px;
-  font-weight: bold;
-  font-size: 14px;
+.sidebar {
+  width: 300px;
+  background-color: #3b3b3b;
+  padding: 20px;
+  border-radius: 10px;
+  margin-right: 20px;
+  height: fit-content;
 }
 
-.navbar a:hover {
-  color: #9b59b6;
+.game-cards {
+  flex-grow: 1;
+  max-width: calc(100% - 320px);
 }
 
-.navbar .logo {
-  font-size: 24px;
-  font-weight: bold;
+/* Filter Section */
+.filter-group {
+  margin-bottom: 20px;
+}
+
+.filter-group h4 {
   color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.filter-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background-color: #4d4d4d;
+  color: #ffffff;
+  padding: 10px;
+  margin-bottom: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filter-option:hover,
+.filter-option.selected {
+  background-color: #9b59b6;
+}
+
+.sidebar button {
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.apply-filters-btn {
+  background-color: #9b59b6;
+  border-color: #9b59b6;
+}
+
+.apply-filters-btn:hover {
+  background-color: #8e44ad;
+  border-color: #8e44ad;
+}
+
+.clear-filters-btn {
+  background-color: #636e72;
+  border-color: #636e72;
+}
+
+.clear-filters-btn:hover {
+  background-color: #4d5d5d;
+  border-color: #4d5d5d;
 }
 
 /* Card Design */
@@ -119,53 +168,6 @@ ion-content {
 .btn-outline-secondary:hover {
   background-color: #4d5d5d;
   border: none;
-}
-
-.filters {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.filters .form-control {
-  margin: 0 10px;
-  max-width: 200px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  padding: 8px;
-  background-color: #3b3b3b;
-  color: #ffffff;
-}
-
-.filters .form-control::placeholder {
-  color: #ffffff;
-}
-
-.filters button {
-  margin: 0 10px;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-.apply-filters-btn {
-  background-color: #9b59b6;
-  border-color: #9b59b6;
-}
-
-.apply-filters-btn:hover {
-  background-color: #8e44ad;
-  border-color: #8e44ad;
-}
-
-.clear-filters-btn {
-  background-color: #636e72;
-  border-color: #636e72;
-}
-
-.clear-filters-btn:hover {
-  background-color: #4d5d5d;
-  border-color: #4d5d5d;
 }
 
 /* Pagination */
