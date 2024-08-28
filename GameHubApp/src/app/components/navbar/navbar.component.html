@@ -1,16 +1,40 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title (click)="goToHomePage()">GameHub</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="goToHomePage()">Home</ion-button>
-      <ion-button (click)="goToSignupPage()">Register</ion-button>
-      <ion-button (click)="goToLoginPage()">Login</ion-button>
-      <ion-button (click)="goToFavouritesPage()">Your Games</ion-button>
-      <ion-button (click)="goToRecoomendationsPage()">Recommendation</ion-button>
-      <ion-button (click)="goToStoresPage()">Store</ion-button>
-      <ion-button (click)="goToOrdersPage()">Orders</ion-button>
-      <ion-button (click)="goToCartPage()">Cart</ion-button>
-      <ion-button *ngIf="isLoggedIn" (click)="logout()">Logout</ion-button>
+  <ion-toolbar class="custom-navbar">
+    <ion-title (click)="goToHomePage()" class="navbar-title">
+      GameHub
+    </ion-title>
+    <ion-buttons slot="end" class="navbar-buttons">
+      <ion-button class="navbar-link" (click)="goToStoresPage()">
+        <ion-icon name="storefront-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button class="navbar-link" (click)="goToCartPage()">
+        <ion-icon name="cart-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button *ngIf="isLoggedIn" class="navbar-link" (click)="goToFavouritesPage()">
+        <ion-icon name="heart-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button class="navbar-link" (click)="goToRecoomendationsPage()">
+        <ion-icon name="thumbs-up-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button class="navbar-link" (click)="goToOrdersPage()">
+        <ion-icon name="list-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button *ngIf="!isLoggedIn" class="navbar-link" (click)="goToSignupPage()">
+        <ion-icon name="person-add-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button *ngIf="!isLoggedIn" class="navbar-link" (click)="goToLoginPage()">
+        <ion-icon name="log-in-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button *ngIf="isLoggedIn" class="navbar-link" (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

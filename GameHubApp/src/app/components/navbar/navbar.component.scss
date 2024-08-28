@@ -1,8 +1,64 @@
-ion-toolbar {
-    --background: #3880ff;
-    --color: #fff;
+ion-toolbar.custom-navbar {
+  --background: #3b3b3b;
+  --color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.navbar-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #9b59b6;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.navbar-link {
+  --background: none;
+  --color: #ffffff;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 5px;
+}
+
+.navbar-link ion-icon {
+  margin-right: 5px;
+}
+
+.navbar-link:hover {
+  --background: #9b59b6;
+  --color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .navbar-buttons {
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    align-items: center;
   }
-  ion-title {
+
+  ion-toolbar.custom-navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-title {
+    margin-bottom: 10px;
     font-size: 1.2rem;
-    font-weight: bold;
   }
+
+  ion-buttons[slot="end"] {
+    justify-content: center;
+  }
+}

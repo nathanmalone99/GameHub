@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
     this.user$.subscribe(user => {
       this.isLoggedIn = !!user;
       if (!user) {
-        this.clearUserData();  // Clear user-specific data when logged out
+        this.clearUserData();
       }
     });
   }
