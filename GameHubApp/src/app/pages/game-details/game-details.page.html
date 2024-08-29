@@ -1,15 +1,19 @@
-<app-navbar>
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="/home"></ion-back-button>
-      </ion-buttons>
-      <ion-title>{{ game?.name }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</app-navbar>
+<app-navbar></app-navbar>
 
 <ion-content>
+  <!-- Hero Section with Carousel -->
+  <div *ngIf="gameScreenshots.length > 0; else noScreenshots" class="carousel-section">
+    <swiper-container pagination="true">
+      <swiper-slide *ngFor="let screenshot of gameScreenshots">
+        <img [src]="screenshot.image" alt="Screenshot" class="carousel-image" />
+      </swiper-slide>
+    </swiper-container>
+  </div>
+
+  <ng-template #noScreenshots>
+    <div class="alert alert-warning" role="alert">No Screenshots Found</div>
+  </ng-template>
+
   <div class="container">
     <div class="d-flex justify-content-center">
       <div class="game-card">
@@ -46,31 +50,6 @@
     <ng-template #noAdditions>
       <div class="alert alert-warning" role="alert">No Additions Found</div>
     </ng-template>
-
-    <h2>Screenshots</h2>
-    <div *ngIf="gameScreenshots.length > 0; else noScreenshots">
-      <div *ngFor="let screenshot of gameScreenshots" class="screenshot-item">
-        <img [src]="screenshot.image" alt="Screenshot" />
-      </div>
-    </div>
-
-    <ng-template #noScreenshots>
-      <div class="alert alert-warning" role="alert">No Screenshots Found</div>
-    </ng-template>
-
-    <!-- <h2>Movie Previews</h2>
-    <div *ngIf="gameMovies.length > 0; else noMovies">
-      <div *ngFor="let movie of gameMovies" class="movie-item">
-        <h3>{{ movie.name }}</h3>
-        <video controls [src]="movie.preview" class="movie-preview" type="video/mp4"></video>
-      </div>
-    </div>
-
-    <ng-template #noMovies>
-      <div class="alert alert-warning" role="alert">
-        No Movies Found
-      </div>
-    </ng-template> -->
 
     <h2>Tags</h2>
     <div *ngIf="gameTags.length > 0; else noTags">

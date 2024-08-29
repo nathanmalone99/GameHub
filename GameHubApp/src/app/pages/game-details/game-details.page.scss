@@ -1,11 +1,23 @@
 :host {
   ion-content {
-    --background: var(--ion-background-color, #f8f8f8);
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100%;
+    --background: #2c2c2c;
     padding: 20px;
+  }
+
+  .carousel-section {
+    margin-bottom: 30px;
+    padding: 10px;
+  }
+
+  swiper-container {
+    height: 800px; /* Increase the height of the carousel */
+  }
+
+  .carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
   }
 
   .d-flex {
@@ -25,13 +37,14 @@
   }
 
   .game-card {
-    max-width: 600px;
+    max-width: 1000px; /* Keep the increased max-width */
     width: 100%;
     margin: 20px 0;
     border: none;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background-color: #3b3b3b;
+    color: #ffffff;
   }
 
   .game-image {
@@ -44,12 +57,12 @@
   .card-title {
     font-size: 24px;
     font-weight: bold;
-    color: var(--ion-color-primary, #3880ff);
+    color: #9b59b6;
   }
 
   .card-text {
     font-size: 16px;
-    color: var(--ion-color-dark, #333);
+    color: #bbbbbb;
   }
 
   .loading-spinner {
@@ -60,15 +73,15 @@
   h2 {
     margin-top: 30px;
     font-size: 24px;
-    color: var(--ion-color-primary, #3880ff);
+    color: #9b59b6;
   }
 
   .addition-item {
     display: flex;
     align-items: center;
-    background-color: #fff;
+    background-color: #4d4d4d;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     margin: 10px 0;
     padding: 15px;
     transition: transform 0.2s;
@@ -99,19 +112,21 @@
   .addition-name {
     font-size: 18px;
     font-weight: bold;
-    color: var(--ion-color-dark, #333);
+    color: #ffffff;
     margin-bottom: 5px;
   }
 
   .addition-released {
     font-size: 14px;
-    color: var(--ion-color-medium, #666);
+    color: #bbbbbb;
     margin-bottom: 10px;
   }
 
   .alert {
     text-align: center;
     margin-top: 20px;
+    background-color: #444;
+    color: #ffffff;
   }
 
   .screenshot-item {
@@ -137,6 +152,22 @@
   }
 
   .star-icon {
-    color: yellow;
+    color: #f39c12;
+  }
+
+  .form-control {
+    background-color: #4d4d4d;
+    border: 1px solid #555;
+    color: #ffffff;
+  }
+
+  .btn-primary {
+    background-color: #9b59b6;
+    border-color: #8e44ad;
+  }
+
+  .btn-primary:hover {
+    background-color: #8e44ad;
+    border-color: #7d3c98;
   }
 }

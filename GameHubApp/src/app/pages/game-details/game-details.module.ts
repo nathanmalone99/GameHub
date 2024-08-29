@@ -1,13 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
 import { GameDetailsPageRoutingModule } from './game-details-routing.module';
-
 import { GameDetailsPage } from './game-details.page';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+
 
 @NgModule({
   imports: [
@@ -17,6 +15,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
     SharedModule,
     GameDetailsPageRoutingModule
   ],
-  declarations: [GameDetailsPage]
+  declarations: [GameDetailsPage],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA] // Add this line if necessary
 })
 export class GameDetailsPageModule {}
