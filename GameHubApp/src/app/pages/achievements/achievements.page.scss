@@ -1,23 +1,79 @@
-.achievements-card {
-    width: 90%;
-    max-width: 500px;
-    margin: auto;
+:host {
+  ion-content {
+    --background: #3b3b3b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
   }
-  
+
+  .achievements-card {
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    background-color: #3b3b3b;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    color: #ffffff;
+  }
+
   .d-flex {
     height: 100vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
   }
-  
-  .card {
-    padding: 20px;
+
+  .card-title {
+    color: #9b59b6;
   }
-  
+
   ion-item {
     --background: transparent;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #555;
+    color: #ffffff;
   }
-  
+
   ion-avatar img {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #9b59b6;
   }
+
+  ion-label h2 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+  }
+
+  ion-label p {
+    color: #bbbbbb;
+  }
+
+  ion-checkbox {
+    --background: #444;
+    --border-color: #9b59b6;
+    --checkmark-color: #9b59b6;
+  }
+
+  .card-body {
+    padding: 10px;
+  }
+
+  .text-center {
+    color: #ffffff;
+  }
+
+  ion-header {
+    background-color: #3b3b3b;
+    color: #ffffff;
+
+    ion-title {
+      color: #9b59b6;
+    }
+  }
+}
