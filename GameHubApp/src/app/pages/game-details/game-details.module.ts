@@ -16,6 +16,6 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
     GameDetailsPageRoutingModule
   ],
   declarations: [GameDetailsPage],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA] // Add this line if necessary
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GameDetailsPageModule {}
