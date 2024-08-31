@@ -7,27 +7,29 @@
 </app-navbar>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of cartItems">
-      <ion-thumbnail slot="start">
-        <img [src]="item.background_image" />
-      </ion-thumbnail>
+  <div class="cart-container">
+    <ion-list class="cart-list">
+      <ion-item *ngFor="let item of cartItems" class="cart-item">
+        <ion-thumbnail slot="start">
+          <img [src]="item.background_image" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{ item.name }}</h2>
+          <p>{{ item.released }}</p>
+          <p>Price: €{{ item.price }}</p>
+        </ion-label>
+        <ion-button slot="end" (click)="removeGame(item.id)" class="remove-button">Remove</ion-button>
+      </ion-item>
+    </ion-list>
+    <ion-item class="total-item">
       <ion-label>
-        <h2>{{ item.name }}</h2>
-        <p>{{ item.released }}</p>
-        <p>Price: €{{ item.price }}</p>
+        <h2>Total</h2>
       </ion-label>
-      <ion-button color="danger" slot="end" (click)="removeGame(item.id)">Remove</ion-button>
+      <ion-note slot="end" class="total-amount">
+        €{{ total.toFixed(2) }}
+      </ion-note>
     </ion-item>
-  </ion-list>
-  <ion-item>
-    <ion-label>
-      <h2>Total</h2>
-    </ion-label>
-    <ion-note slot="end">
-      €{{ total.toFixed(2) }}
-    </ion-note>
-  </ion-item>
-  <ion-button expand="full" (click)="clearCart()">Clear Cart</ion-button>
-  <ion-button expand="full" (click)="proceedToCheckout()">Proceed to Checkout</ion-button>
+    <ion-button expand="full" class="cart-button" (click)="clearCart()">Clear Cart</ion-button>
+    <ion-button expand="full" class="cart-button" (click)="proceedToCheckout()">Proceed to Checkout</ion-button>
+  </div>
 </ion-content>
