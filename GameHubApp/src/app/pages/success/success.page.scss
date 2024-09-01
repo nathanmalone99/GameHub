@@ -1,0 +1,43 @@
+ion-content {
+    --background: #2c2c2c;
+  }
+  
+  .success-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .success-container {
+    background-color: #3b3b3b;
+    padding: 40px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .success-container h2 {
+    font-size: 36px;
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+  
+  .success-container p {
+    font-size: 18px;
+    color: #bbbbbb;
+    margin-bottom: 40px;
+  }
+  
+  .back-home-button {
+    --background: #9b59b6;
+    --border-radius: 10px;
+    font-size: 16px;
+    --padding-start: 20px;
+    --padding-end: 20px;
+  }
+  
+  .back-home-button:hover {
+    --background: #8e44ad;
+  }
+  

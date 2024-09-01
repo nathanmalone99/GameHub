@@ -6,7 +6,6 @@ import { CartService } from 'src/app/services/cart.service';
 import { StripeService } from 'src/app/services/stripe.service';
 import firebase from 'firebase/compat/app';
 
-
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.page.html',

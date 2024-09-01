@@ -1,14 +1,15 @@
+require('dotenv').config(); 
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const stripe = require('stripe')('sk_test_51N7gd7IB2R5TmgiioGQN6rwHxBFW4P22XgvmE5X9ilmmulnfMAoXZDUpuXuvEZKCWswMCfo85pL2qLEEsSBt1o0m00wyolSf7M');
 const admin = require('firebase-admin');
 
-const serviceAccount = require('./config/serviceAccountKey.json');
+const serviceAccount = require(process.env.GOOGLE_APPLICATION_CREDENTIALS);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://gamehub-e4466-default-rtdb.europe-west1.firebasedatabase.app'
+  databaseURL: 'https://gamehub3-25198.firebaseio.com'
 });
 
 const db = admin.firestore();
@@ -57,8 +58,37 @@ app.post('/create-checkout-session', async (req, res) => {
       id: session.id,
     });
   } catch (error) {
+    console.error('Error creating checkout session:', error); // Log the error details
     res.status(500).send({ error: error.message });
   }
+});
+
+// Webhook to handle Stripe events, like session completion
+app.post('/webhook', bodyParser.raw({ type: 'application/json' }), (request, response) => {
+  const sig = request.headers['stripe-signature'];
+
+  let event;
+
+  try {
+    event = stripe.webhooks.constructEvent(request.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+  } catch (err) {
+    response.status(400).send(`Webhook Error: ${err.message}`);
+    return;
+  }
+
+  // Handle the checkout.session.completed event
+  if (event.type === 'checkout.session.completed') {
+    const session = event.data.object;
+
+    // Update the order in Firestore
+    const orderRef = db.collection('orders').doc(session.id);
+    orderRef.update({
+      status: 'completed',
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+  }
+
+  response.json({ received: true });
 });
 
 app.listen(4242, () => console.log('Server is running on port 4242'));
