@@ -8,4 +8,4 @@ The storefront page is where you can add games to your cart and proceed to check
 GameHub is hosted at the URL below
 https://gamehub3-25198.web.app
 
-But a lot of the features are not working in the hosted version but you can still see some of the pages.
+Everything works except the checkout on the hosted version, I am unsure why this is. 
